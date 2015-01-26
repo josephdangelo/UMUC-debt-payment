@@ -1,0 +1,19 @@
+<div ng-controller="AccountEntryController">
+	<h2>Account List</h2>
+
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Balance</th>
+				<th>APR</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="account in accounts">
+				<td>{{account.name}}</td>
+				<td>{{account.balance}}</td>
+				<td>{{account.APR}}</td>
+			</tr>
+	</table>
+</div>
