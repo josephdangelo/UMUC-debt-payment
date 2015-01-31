@@ -2,7 +2,8 @@
 	account-list.html
 	Purpose: Lists all the accounts currently in the system
 -->
-<div ng-controller="AccountListController">
+
+<div>
 	<div class="page-header">
 		<h2>Account List</h2>
 	</div>
@@ -14,6 +15,7 @@
 				<th>APR</th>
 				<th>Current Balance</th>
 				<th>Monthly Payment</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +25,10 @@
 				<td>{{ account.APR }}%</td>
 				<td>{{ account.balance | currency }}</td>
 				<td>{{ account.payment | currency }}</td>
+				<td>
+					<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href=""><i class="glyphicon glyphicon-trash"></i></a>
+				</td>
 			</tr>
 	</table>
 </div>
