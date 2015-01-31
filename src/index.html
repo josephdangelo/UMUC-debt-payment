@@ -1,11 +1,19 @@
+<!-- 
+	index.html
+
+	Purpose: Main file for the SPA.  Includes the relevent libraries and the initial view for the app.
+-->
 <!DOCTYPE html>
 <html ng-app="debt-calculator">
   <head>
     <title>Debt Repayment Calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
     <script src="debt-calculator.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   </head>
   <body>
-  	<div ng-include="'account/account-entry/account-entry.html'">
+  	<div ng-include="'common/header.html'"></div>
+  	<div ng-include="'account/account-list/account-list.html'"></div>
   </body>
 </html>

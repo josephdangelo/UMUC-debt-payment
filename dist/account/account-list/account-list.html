@@ -1,0 +1,28 @@
+<!-- 
+	account-list.html
+	Purpose: Lists all the accounts currently in the system
+-->
+<div ng-controller="AccountListController">
+	<div class="page-header">
+		<h2>Account List</h2>
+	</div>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>APR</th>
+				<th>Current Balance</th>
+				<th>Monthly Payment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Iterate through the accounts in the system and display their information -->
+			<tr ng-repeat="account in accounts">
+				<td>{{ account.name }}</td>
+				<td>{{ account.APR }}%</td>
+				<td>{{ account.balance | currency }}</td>
+				<td>{{ account.payment | currency }}</td>
+			</tr>
+	</table>
+</div>
