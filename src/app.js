@@ -15,5 +15,9 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				templateUrl: 'report/report.html',
 				controller: 'ReportController'
 			})
+			.when('/about', {
+				templateUrl: 'about/about.html',
+				controller: 'AboutController'
+			})
 			.otherwise({ redirectTo: '/accounts' });
 		});

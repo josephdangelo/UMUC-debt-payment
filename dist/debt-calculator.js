@@ -15,8 +15,25 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				templateUrl: 'report/report.html',
 				controller: 'ReportController'
 			})
+			.when('/about', {
+				templateUrl: 'about/about.html',
+				controller: 'AboutController'
+			})
 			.otherwise({ redirectTo: '/accounts' });
 		});
+
+var aboutController = function( $scope, AccountFactory ) {
+	$scope.about = AccountFactory.about;
+};
+
+angular.module( 'debt-calculator' )
+	.controller( 'AboutController', aboutController );
+var accountEntryController = function( $scope, AccountFactory ) {
+	$scope.accounts = AccountFactory.accounts;
+};
+
+angular.module( 'debt-calculator' )
+	.controller( 'AccountEntryController', accountEntryController );
 /*
 	account-factory.js
 
@@ -25,7 +42,7 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 4000, APR: 3.4, payment: 200 }];
+	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 4000, APR: 3.4, payment: 175 }];
 
 	return factory;
 };
