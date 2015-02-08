@@ -19,6 +19,10 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				templateUrl: 'about/about.html',
 				controller: 'AboutController'
 			})
+			.when('/howtouse', {
+				templateUrl: 'howtouse/howtouse.html',
+				controller: 'HowToUseController'
+			})
 			.otherwise({ redirectTo: '/accounts' });
 		});
 
@@ -42,7 +46,8 @@ angular.module( 'debt-calculator' )
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 4000, APR: 3.4, payment: 175 }];
+	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 4000, APR: 3.4, payment: 175 },
+						{ name: 'Citi Credit Card', balance: 2000, APR: 7.4, payment: 75 }];
 
 	return factory;
 };
@@ -65,6 +70,13 @@ var navController = function( $scope, $location ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'NavController', navController );
+
+var HowToUseController = function( $scope, AccountFactory ) {
+	$scope.howtouse = AccountFactory.howtouse;
+};
+
+angular.module( 'debt-calculator' )
+	.controller( 'HowToUseController', HowToUseController );
 var reportController = function( $scope ) {
 	$('#container').highcharts({
 		        title: {
