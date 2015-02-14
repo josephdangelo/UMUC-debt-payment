@@ -25,20 +25,28 @@
 				<td>{{ account.APR }}%</td>
 				<td>{{ account.balance | currency }}</td>
 				<td>{{ account.payment | currency }}</td>
+			
 				<td>
 					<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
 					<a href=""><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
-			
+			<tr>
+					<th>Name</th>
+					<th>Blended APR</th>
+					<th>Total Balance</th>
+					<th>Total Monthly Pymt</th>
+				
+				</tr>
 			</tr>
 			<tfoot>
-			<tr>
-				<th>Name</th>
-				<th>Blended APR</th>
-				<th>Total Balance</th>
-				<th>Total Monthly Pymt</th>
 				
-			</tr>
-		</tfoot>
+					<th><input type="text" class="addItemTBox0" ng-model="addNew" disabled></th>
+					<th><input type="text" class="addItemTBox1" ng-model="blendedAPR" disabled></th>
+					<th><input type="text" class="addItemTBox2" ng-model="totalBalance" disabled></th>
+					<th><input type="text" class="addItemTBox3" ng-model="totalMonthly" disabled></th>
+				
+				
+			</tfoot>
+			
 	</table>
 </div>
