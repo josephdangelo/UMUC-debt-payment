@@ -35,15 +35,17 @@
 					<th>Blended APR</th>
 					<th>Total Balance</th>
 					<th>Total Monthly Pymt</th>
+					<th></th>
 				
 				</tr>
 			</tr>
 			<tfoot>
 				
-					<th><input type="text" class="addItemTBox0" ng-model="addNew" disabled></th>
-					<th><input type="text" class="addItemTBox1" ng-model="blendedAPR" disabled></th>
-					<th><input type="text" class="addItemTBox2" ng-model="totalBalance" disabled></th>
-					<th><input type="text" class="addItemTBox3" ng-model="totalMonthly" disabled></th>
+					<th>Totals</th>
+					<th>{{blendedAPR()}}%</th>
+					<th>{{ totalBalance() | currency }}</th>
+					<th>{{ totalMonthly() | currency }}</th>
+					
 				
 				
 			</tfoot>

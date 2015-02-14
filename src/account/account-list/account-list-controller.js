@@ -4,20 +4,19 @@ var accountListController = function( $scope, AccountFactory ) {
 //$scope.totalHouse = 45;//works and display 45 on list page
 $scope.addNew = "Totals";
 
-//works finally
-//$scope.totalHouse = $scope.accounts[1].name;
+// works finally
+// $scope.totalHouse = $scope.accounts[1].name;
 
-$scope.blendedAPR = function () {
-	$scope.answer0 = 0;
+ $scope.blendedAPR = function () {
+	answer0 = 0;
 	for(var i=0, len=$scope.accounts.length; i < len; ++i)
 
 	{
-    	$scope.answer0 += Number($scope.accounts[i].APR);
+    	answer0 += Number($scope.accounts[i].APR);
 	}
 
- $scope.totalHouse0 = $scope.answer0 / $scope.accounts.length;
- return $scope.totalHouse0;
-
+ $scope.totalHouse0 = answer0 / $scope.accounts.length;
+return $scope.totalHouse0;
 }; //end addNew function
 
 
