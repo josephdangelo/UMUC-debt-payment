@@ -51,4 +51,29 @@
 			</tfoot>
 			
 	</table>
+	
+	<h2>Temporary Monthly Report</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Month</th>
+				<!-- Iterate through the accounts in the system and display their names -->
+				<th ng-repeat="account in accounts">{{ account.name }}</th>
+				<th>Total Interest</td>
+				<th>Money Not Applied</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="themonth in themonth">
+				<td>{{ themonth }}</td>
+				<td>{{ b0[themonth] | currency }} </td>
+				<td>{{ b1[themonth] | currency }} </td>
+				<td>{{ b2[themonth] | currency }} </td>
+				<td>{{ b3[themonth] | currency }} </td>
+				<td>{{ b4[themonth] | currency }} </td>
+				<td>{{ totalinterest[themonth] | currency }} </td>
+				<td>{{ notapplied[themonth] | currency }} </td>
+			</tr>
+		</tbody>
+	</table>
 </div>
