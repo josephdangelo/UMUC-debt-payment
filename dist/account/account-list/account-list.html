@@ -19,6 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
+
 			<!-- Iterate through the accounts in the system and display their information -->
 			<tr ng-repeat="account in accounts">
 				<td>{{ account.name }}</td>
@@ -30,22 +31,41 @@
 					<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
 					<a href=""><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
-			<tr>
+			<tr> 
+
+			<!-- Form to take user input -->
+			<form>
+			<!--	<td><input type="text" ng-model="account.name"/></td> -->
+				<td><input type="text" value="Account Name" /></td>
+				<td><input type="text" value="5.5"/></td>
+				<td><input type="text" value="1500" /></td>
+				<td><input type="text" value="25.00" /></td>
+
+				<td>
+					<input type="submit" value="Add New Account">
+				</td>
+			</form>
+			</tbody>
+		</table>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
 					<th>Name</th>
 					<th>Blended APR</th>
 					<th>Total Balance</th>
-					<th>Total Monthly Pymt</th>
-					<th></th>
-				
+					<th>Total Monthly Payment</th>
 				</tr>
-			</tr>
+			</thead>
+				<tbody></tbody>
 			<tfoot>
 				
-					<th>Totals</th>
-					<th>{{blendedAPR()}}%</th>
-					<th>{{ totalBalance() | currency }}</th>
-					<th>{{ totalMonthly() | currency }}</th>
-					
+					<th> Totals</th>
+			<!--		<th><input type="text" class="addItemTBox1" ng-model="blendedAPR" disabled></th>
+			-->
+					<th> <input ng-model="blendedAPR" disabled></th>
+					<th><input ng-model="totalBalance" disabled></th>
+					<th><input ng-model="totalMonthly" disabled></th>
 				
 				
 			</tfoot>
