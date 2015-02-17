@@ -29,25 +29,25 @@
 			
 				<td>
 					<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-					<a href=""><i class="glyphicon glyphicon-trash"></i></a>
+					<a href="" ng-click="deleteAccount( account )"><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
 			<tr> 
 
 			<!-- Form to take user input -->
 			<form>
 			<!--	<td><input type="text" ng-model="account.name"/></td> -->
-				<td><input type="text" value="Account Name" /></td>
-				<td><input type="text" value="5.5" /></td>
-				<td><input type="text" value="1500" /></td>
-				<td><input type="text" value="25.00" /></td>
+				<td><input type="text" ng-model="newAccount.name" placeholder="Account Name" /></td>
+				<td><input type="text" ng-model="newAccount.APR" placeholder="e.g., 5.5" /></td>
+				<td><input type="text" ng-model="newAccount.balance" placeholder="e.g., 1,500" /></td>
+				<td><input type="text" ng-model="newAccount.payment" placeholder="e.g., 25.00" /></td>
 
 				<td>
-					<a href=""><i class="glyphicon glyphicon-ok-sign"></i></a>
+					<a href="" ng-click="create()"><i class="glyphicon glyphicon-ok-sign"></i></a>
 				</td>
 			</form>
 			</tbody>
 		</table>
-
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
