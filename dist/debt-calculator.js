@@ -106,6 +106,11 @@ var accountListController = function( $scope, AccountFactory ) {
 
 	}; //end addNew function
 
+	$scope.reset = function() {
+
+		$scope.newAccount = "";
+	};
+
 	$scope.create = function() {
 		AccountFactory.create( $scope.newAccount );
 
