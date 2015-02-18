@@ -32,39 +32,41 @@
 				  </div>
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
-				      <button class="btn btn-primary">Generate Report</button>
+				      <button class="btn btn-primary" ng-click="runReport()">Generate Report</button>
 				    </div>
 				  </div>
 				</form>
 			</div>
 			</div>
-			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			
 		</div>
 	</div>
-
-	<h2>Temporary Monthly Report</h2>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Month</th>
-				<!-- Iterate through the accounts in the system and display their names -->
-				<th ng-repeat="account in accounts">{{ account.name }}</th>
-				<th>Total Interest</td>
-				<th>Money Not Applied</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="themonth in themonth">
-				<td>{{ themonth }}</td>
-				<td>{{ b0[themonth] | currency }} </td>
-				<td>{{ b1[themonth] | currency }} </td>
-				<td>{{ b2[themonth] | currency }} </td>
-				<td>{{ b3[themonth] | currency }} </td>
-				<td>{{ b4[themonth] | currency }} </td>
-				<td>{{ totalinterest[themonth] | currency }} </td>
-				<td>{{ notapplied[themonth] | currency }} </td>
-			</tr>
-		</tbody>
-	</table>
+	<div ng-show="reportData.months.length" class="row">
+		<div class="col-sm-offset-1 col-sm-10">
+			<div id="container" style="width: 1200px; height: 400px; margin: 0 auto"></div>
+			<h2>Temporary Monthly Report</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Month</th>
+						<!-- Iterate through the accounts in the system and display their names -->
+						<th ng-repeat="account in reportData.accounts">{{ account }}</th>
+						<th>Total Interest</td>
+						<th>Money Not Applied</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="month in reportData.months">
+						<td>{{ $index }}</td>
+						<td ng-repeat="item in month.accounts">
+							{{ item.endingBalance | currency }}
+						</td>
+						<td>{{ month.totalInterest | currency }} </td>
+						<td>{{ month.notApplied | currency }} </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	
 </div>
