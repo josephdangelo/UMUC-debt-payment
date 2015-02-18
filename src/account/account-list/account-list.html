@@ -15,7 +15,7 @@
 				<th>APR</th>
 				<th>Current Balance</th>
 				<th>Monthly Payment</th>
-				<th>Actions</th>
+				<th>Actions </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -84,12 +84,11 @@
 			<tfoot>
 				
 					<th> Totals</th>
-			<!--		<th><input type="text" class="addItemTBox1" ng-model="blendedAPR" disabled></th>
-			-->
-					<th> <input ng-model="blendedAPR" disabled></th>
-					<th><input ng-model="totalBalance" disabled></th>
-					<th><input ng-model="totalMonthly" disabled></th>
-				
+			
+					
+					<th>{{blendedAPR()}}%</th>
+					<th>{{ totalBalance() | currency }}</th>
+					<th>{{ totalMonthly() | currency }}</th>
 				
 			</tfoot>
 			
