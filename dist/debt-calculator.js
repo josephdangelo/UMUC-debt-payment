@@ -231,11 +231,11 @@ var reportController = function( $scope, AccountFactory ) {
 // data fields
 // data fields for output
 $scope.themonth = [0];
-$scope.b0 = [$scope.accounts[0].balance];
-$scope.b1 = [$scope.accounts[1].balance];
-$scope.b2 = [$scope.accounts[2].balance];
-$scope.b3 = [$scope.accounts[3].balance];
-$scope.b4 = [$scope.accounts[4].balance];
+
+for ( var i = 0; i < $scope.accounts.length; i++ ) {
+	$scope["b" + i ] = [$scope.accounts[i].balance];
+}
+
 $scope.totalinterest = [0];
 $scope.notapplied = [0];
 /* $scope.thebalance = [[$scope.accounts[0].balance],[$scope.accounts[1].balance],
@@ -281,77 +281,25 @@ while($scope.month_no < 200){
 	$scope.remainder = $scope.extra - $scope.mandatory_payment;
 	// check if the chosen account have enough balance to paid off
 	// and update the account balances
+
+	// assign monthly account balances to account balance arrays
+	for ( i = 0; i < $scope.accounts.length; i ++ ) {
+		if ( $scope.theaccount === i ) { 
+			$scope["b" + i ][$scope.month_no] = $scope.bal[$scope.theaccount];
+		} else {
+			$scope["b" + i ][$scope.month_no] = $scope["b" + i ][$scope.month_no-1];
+		}
+	} 
+	
 	if($scope.bal[$scope.theaccount] > $scope.remainder){
 		$scope.bal[$scope.theaccount] -= $scope.remainder;
 		$scope.remainder = 0;
-		// assign monthly account balances to account balance arrays
-		if($scope.theaccount === 0){
-			$scope.b0[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 1){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 2){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 3){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 4){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.bal[$scope.theaccount];
-		}
+		
 	} else {
 		$scope.remainder -= $scope.bal[$scope.theaccount];
 		$scope.bal[$scope.theaccount] = 0;
 		$scope.notapplied[$scope.month_no] = $scope.remainder;
-		// assign monthly account balances to account balance arrays
-		if($scope.theaccount === 0){
-			$scope.b0[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 1){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 2){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 3){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.bal[$scope.theaccount];
-			$scope.b4[$scope.month_no] = $scope.b4[$scope.month_no-1];
-		} else if($scope.theaccount === 4){
-			$scope.b0[$scope.month_no] = $scope.b0[$scope.month_no-1];
-			$scope.b1[$scope.month_no] = $scope.b1[$scope.month_no-1];
-			$scope.b2[$scope.month_no] = $scope.b2[$scope.month_no-1];
-			$scope.b3[$scope.month_no] = $scope.b3[$scope.month_no-1];
-			$scope.b4[$scope.month_no] = $scope.bal[$scope.theaccount];
-		}
+		
 		$scope.theaccount++;
 	}
 	if($scope.theaccount == $scope.accounts.length) { break;}
