@@ -84,11 +84,21 @@
 			<tfoot>
 				
 					<th> Totals</th>
-			<!--		<th><input type="text" class="addItemTBox1" ng-model="blendedAPR" disabled></th>
-			-->
-					<th> <input ng-model="blendedAPR" disabled></th>
-					<th><input ng-model="totalBalance" disabled></th>
-					<th><input ng-model="totalMonthly" disabled></th>
+			
+					<td><div class="input-group input-group-sm">
+						<input type="text" class="form-control" ng-model="blendedAPR" aria-describedby="basic-addon3" disabled>
+						<span class="input-group-addon" id="basic-addon3">%</span>
+					</div></td>
+
+					<th><div class="input-group input-group-sm">
+						<span class="input-group-addon" id="basic-addon4">$</span>
+						<input type="text" class="form-control" ng-model="totalBalance" aria-describedby="basic-addon4" disabled>
+					</div></th>
+
+					<th><div class="input-group input-group-sm">
+						<span class="input-group-addon" id="basic-addon5">$</span>
+						<input type="text" class="form-control" ng-model="totalMonthly" aria-describedby="basic-addon5" disabled>
+					</div></th>
 				
 				
 			</tfoot>
