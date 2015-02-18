@@ -28,16 +28,16 @@
 				<td>{{ account.payment | currency }}</td>
 			
 				<td>
-					<a href=""><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href="" ng-click="editAccount( account )"><i class="glyphicon glyphicon-pencil"></i></a>	
 					<a href="" ng-click="deleteAccount( account )"><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
 			<tr> 
 
 			<!-- Form to take user input -->
-			<form>
+			<form novalidate class="css-form">
 				<!-- ADD Name -->
 				<td><div class="input-group input-group-sm">
-					<input type="text" class="form-control" ng-model="newAccount.name" placeholder="Account Name" />
+					<input type="text" class="form-control" ng-model="newAccount.name" placeholder="Account Name" required />
 				</div></td>
 				<!-- ADD APR -->
 				<td><div class="input-group input-group-sm">
@@ -56,10 +56,18 @@
 				</div></td>
 
 				<td>
-					<a href="" ng-click="reset()"><i class="glyphicon glyphicon-refresh"></i></a>
+					<a href="" ng-click="reset()"><i class="glyphicon glyphicon-refresh" ></i></a>
 					<a href="" ng-click="create()"><i class="glyphicon glyphicon-ok-sign"></i></a>
 				</td>
 			</form>
+			<style type="text/css">
+				.css-form input.ng-invalid.ng-touched {
+					background-color: #FA787E;
+				}
+				.css-form input.ng-valid.ng-touched {
+					background-color: #78FA89;
+				}
+			</style>
 			</tbody>
 		</table>
 		

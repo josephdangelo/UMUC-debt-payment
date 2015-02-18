@@ -30,6 +30,23 @@ var accountFactory = function(){
 		});
 	};
 
+	factory.editAccount = function ( account ) {
+		angular.forEach( factory.accounts, function( item, index) {
+			if ( angular.equals( account, item ) ) {
+				var editAccount = {
+					index : index,
+					name : "newName",
+					APR : "newAPR",
+					balance : "newBalance"
+				};
+				
+			//	factory.accounts.splice( index, 1 ); 
+				factory.accounts.push(updatedAccount);
+			}
+		});
+
+	};
+
 	return factory;
 };
 
