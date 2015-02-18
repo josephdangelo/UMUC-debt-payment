@@ -47,7 +47,9 @@ var accountListController = function( $scope, AccountFactory ) {
 	$scope.editAccount = function( account ) {
 		var selectedAccount = account;
 		console.log(selectedAccount);
-	//	AccountFactory.editAccount ( account );
+		$scope.newAccount = selectedAccount;
+
+		$scope.deleteAccount(account);
 	};
 
 	$scope.deleteAccount = function( account ) {
