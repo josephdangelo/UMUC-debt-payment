@@ -1,15 +1,13 @@
 var accountListController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
 
-	//$scope.totalHouse = 45;//works and display 45 on list page
+	//$scope.totalHouse = 45;
+	//works and display 45 on list page
 	$scope.addNew = "Totals";
 
 	$scope.newAccount = AccountFactory.getNewAccount();
 
-	// works finally
-	// $scope.totalHouse = $scope.accounts[1].name;
-
-	 $scope.blendedAPR = function () {
+	$scope.blendedAPR = function () {
 		answer0 = 0;
 		for(var i=0, len=$scope.accounts.length; i < len; ++i)
 
