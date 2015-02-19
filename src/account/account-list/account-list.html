@@ -85,21 +85,10 @@
 				
 					<th> Totals</th>
 
-					<td><div class="input-group input-group-sm">
-						<input type="text" class="form-control" ng-model="blendedAPR" aria-describedby="basic-addon3" disabled>
-						<span class="input-group-addon" id="basic-addon3">%</span>
-					</div></td>
-
-					<th><div class="input-group input-group-sm">
-						<span class="input-group-addon" id="basic-addon4">$</span>
-						<input type="text" class="form-control" ng-model="totalBalance" aria-describedby="basic-addon4" disabled>
-					</div></th>
-
-					<th><div class="input-group input-group-sm">
-						<span class="input-group-addon" id="basic-addon5">$</span>
-						<input type="text" class="form-control" ng-model="totalMonthly" aria-describedby="basic-addon5" disabled>
-					</div></th> 
-				
+					
+					<th>{{ blendedAPR()|number:2 }}%</th>
+					<th>{{ totalBalance() | currency }}</th>
+					<th>{{ totalMonthly() | currency }}</th>
 
 			</tfoot>
 			
