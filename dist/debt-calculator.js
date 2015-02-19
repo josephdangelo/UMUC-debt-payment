@@ -142,7 +142,7 @@ var accountListController = function( $scope, AccountFactory ) {
 		$scope.newAccount = selectedAccount;
 
 		$scope.deleteAccount(account);
-
+	//	AccountFactory.editAccount ( account );
 	};
 
 	$scope.deleteAccount = function( account ) {
