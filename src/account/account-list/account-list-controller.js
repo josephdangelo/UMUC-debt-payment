@@ -39,10 +39,11 @@ var accountListController = function( $scope, AccountFactory ) {
 
 	$scope.reset = function() {
 
-		$scope.newAccount = "";
+		$scope.newAccount = AccountFactory.getNewAccount();
 	};
 
 	$scope.create = function() {
+		$scope.newAccount.index = AccountFactory.accounts.length;
 		AccountFactory.create( $scope.newAccount );
 
 		$scope.newAccount = AccountFactory.getNewAccount();
@@ -57,7 +58,7 @@ var accountListController = function( $scope, AccountFactory ) {
 	};
 
 	$scope.deleteAccount = function( account ) {
-		AccountFactory.deleteAccount ( account );
+		AccountFactory.deleteAccount ( account.index );
 	};
 
 	$scope.totalMonthly = function () {

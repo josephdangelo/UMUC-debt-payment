@@ -39,13 +39,10 @@ angular.module( 'debt-calculator' )
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 2000, APR: 20, payment: 100 },
-				{ name: 'Citi Credit Card', balance: 3000, APR: 16, payment: 100 },
-				{ name: 'American Airlines Credit Card', balance: 4000, APR: 12, payment: 100 },
-				{ name: 'Ford Explorer Auto Loan', balance: 20000, APR: 7, payment: 400 },
-				{ name: 'Mortgage', balance: 200000, APR: 3, payment: 1200 }];
+	factory.accounts = [];
 
 	factory.create = function( account ) {
+		
 		factory.accounts.push( account );
 	};
 
@@ -54,10 +51,10 @@ var accountFactory = function(){
 			name	: "",
 			balance : "",
 			APR 	: "",
-			payment : ""
+			payment : "",
 		});
 	};
-
+/*
 	factory.deleteAccount = function ( account ) {
 		angular.forEach( factory.accounts, function( item, index ) {
 			if ( angular.equals( account, item ) ) {
@@ -65,6 +62,16 @@ var accountFactory = function(){
 			}
 		});
 	};
+*/
+	factory.deleteAccount = function ( index ) {
+		var i = index;
+		factory.accounts.splice( index, 1 );
+		for(i; i < factory.accounts.length; i++){
+			factory.accounts[i].index = i;
+		}
+
+	};
+	
 
 	factory.editAccount = function ( account ) {
 		angular.forEach( factory.accounts, function( item, index) {
@@ -131,10 +138,11 @@ var accountListController = function( $scope, AccountFactory ) {
 
 	$scope.reset = function() {
 
-		$scope.newAccount = "";
+		$scope.newAccount = AccountFactory.getNewAccount();
 	};
 
 	$scope.create = function() {
+		$scope.newAccount.index = AccountFactory.accounts.length;
 		AccountFactory.create( $scope.newAccount );
 
 		$scope.newAccount = AccountFactory.getNewAccount();
@@ -149,7 +157,7 @@ var accountListController = function( $scope, AccountFactory ) {
 	};
 
 	$scope.deleteAccount = function( account ) {
-		AccountFactory.deleteAccount ( account );
+		AccountFactory.deleteAccount ( account.index );
 	};
 
 	$scope.totalMonthly = function () {
