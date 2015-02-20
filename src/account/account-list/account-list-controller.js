@@ -7,15 +7,19 @@ var accountListController = function( $scope, AccountFactory ) {
 
 	$scope.newAccount = AccountFactory.getNewAccount();
 
+	//(balance1 * APR1)+(balance2 * APR2)+(balance3 * APR3)+... / totalBalance
+
+
 	$scope.blendedAPR = function () {
 		answer0 = 0;
 		for(var i=0, len=$scope.accounts.length; i < len; ++i)
 
 		{
-	    	answer0 += Number($scope.accounts[i].APR);
+	    	answer0 += (Number($scope.accounts[i].APR)* Number($scope.accounts[i].balance));
 		}
+	 $scope.totalHouse0 = answer0 ;
 
-	 $scope.totalHouse0 = answer0 / $scope.accounts.length;
+	// $scope.totalHouse0 = answer0 / $scope.accounts.length;
 	return $scope.totalHouse0;
 	}; //end addNew function
 

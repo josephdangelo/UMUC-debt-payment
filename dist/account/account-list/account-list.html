@@ -74,7 +74,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Name</th>
+					<th></th>
 					<th>Blended APR</th>
 					<th>Total Balance</th>
 					<th>Total Monthly Payment</th>
@@ -83,10 +83,10 @@
 				<tbody></tbody>
 			<tfoot>
 				
-					<th> Totals</th>
+					<th> </th>
 
 					
-					<th>{{ blendedAPR()|number:2 }}%</th>
+					<th>{{ blendedAPR() / totalBalance() | number:2}}%</th>
 					<th>{{ totalBalance() | currency }}</th>
 					<th>{{ totalMonthly() | currency }}</th>
 
