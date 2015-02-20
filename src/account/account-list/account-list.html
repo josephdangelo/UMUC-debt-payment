@@ -3,7 +3,7 @@
 	Purpose: Lists all the accounts currently in the system
 -->
 
-<div>
+<div> 
 	<div class="page-header">
 		<h2>Account List</h2>
 	</div>
@@ -29,7 +29,7 @@
 			
 				<td>
 					<a href="" ng-click="editAccount( account )"><i class="glyphicon glyphicon-pencil"></i></a>	
-					<a href="" ng-click="if (confirm('Delete this account?') ) deleteAccount( account )"><i class="glyphicon glyphicon-trash"></i></a>
+					<a href="" ng-click="deleteAccount( account )"><i class="glyphicon glyphicon-trash"></i></a>
 				</td>
 			<tr> 
 
@@ -84,22 +84,12 @@
 			<tfoot>
 				
 					<th> Totals</th>
+
 					
-					<td><div class="input-group input-group-sm">
-						<input type="text" class="form-control" ng-model="blendedAPR" aria-describedby="basic-addon3" disabled>
-						<span class="input-group-addon" id="basic-addon3">%</span>
-					</div></td>
+					<th>{{ blendedAPR()|number:2 }}%</th>
+					<th>{{ totalBalance() | currency }}</th>
+					<th>{{ totalMonthly() | currency }}</th>
 
-					<th><div class="input-group input-group-sm">
-						<span class="input-group-addon" id="basic-addon4">$</span>
-						<input type="text" class="form-control" ng-model="totalBalance" aria-describedby="basic-addon4" disabled>
-					</div></th>
-
-					<th><div class="input-group input-group-sm">
-						<span class="input-group-addon" id="basic-addon5">$</span>
-						<input type="text" class="form-control" ng-model="totalMonthly" aria-describedby="basic-addon5" disabled>
-					</div></th> 
-				
 			</tfoot>
 			
 	</table>
