@@ -16,18 +16,21 @@
     
     <!-- AngularStrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
     <script src="debt-calculator.js"></script>
 
     <!-- Charting -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-    <!-- Bootstrap styles -->
+    <!-- Bootstrap -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="debt-repayment.css">    
   </head>
   <body>
   	<div ng-include="'common/nav/nav.html'"></div>
-  	<div id="application-container" ng-view></div>
+  	<div id="application-container" class="container-fluid" ng-view></div>
   </body>
 </html>

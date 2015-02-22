@@ -17,10 +17,15 @@ module.exports = function(grunt) {
     },
     watch: {
       // Watches for changes to any .js or .html file and runs the build task
-      files: ['<%= jshint.files %>', 'src/**/*.html'],
+      files: ['<%= jshint.files %>', 'src/**/*.html', 'src/**/*.css'],
       tasks: ['build']
     }, 
     concat: {
+      options: {
+        banner: "(function () {\n'use strict';\n",
+        footer: "\n})();",
+        stripBanners: true
+      },
       // Concatenates all the .js files into one for the /dist
       build: {
         src: ['src/app.js', 'src/**/*.js'],
@@ -30,7 +35,7 @@ module.exports = function(grunt) {
     copy: {
       // Move all the .html files from /src to /dist
       build: {
-        src: '**/*.html',
+        src: ['**/*.html','**/*.css'],
         dest: 'dist/',
         expand: true,
         cwd: 'src/'

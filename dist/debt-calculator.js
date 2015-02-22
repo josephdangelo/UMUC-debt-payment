@@ -1,9 +1,5 @@
-/*
-	app.js
-
-	Purpose: Defines the angular application and its dependencies
-*/
-
+(function () {
+'use strict';
 angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 	.config(function($routeProvider) {
 		$routeProvider
@@ -31,46 +27,49 @@ var accountEntryController = function( $scope, AccountFactory ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'AccountEntryController', accountEntryController );
-/*
-	account-factory.js
-
-	Purpose: Model for the accounts in the system
-*/
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [];
+	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 2000, APR: 20, payment: 100 },
+				{ name: 'Citi Credit Card', balance: 3000, APR: 16, payment: 100 },
+				{ name: 'American Airlines Credit Card', balance: 4000, APR: 12, payment: 100 },
+				{ name: 'Ford Explorer Auto Loan', balance: 20000, APR: 7, payment: 400 },
+				{ name: 'Mortgage', balance: 200000, APR: 3, payment: 1200 }];
 
-	factory.create = function( account ) {
-		
-		factory.accounts.push( account );
+	factory.addAccount = function() {
+		factory.accounts.push( factory.getNewAccount() );
 	};
 
 	factory.getNewAccount = function() {
+		console.log( 'hi ' );
+		
 		return angular.copy( {
 			name	: "",
 			balance : "",
 			APR 	: "",
-			payment : "",
+			payment : ""
 		});
+
+
 	};
-/*
+
 	factory.deleteAccount = function ( account ) {
 		angular.forEach( factory.accounts, function( item, index ) {
 			if ( angular.equals( account, item ) ) {
 				factory.accounts.splice( index, 1 );
+				console.log( account );
 			}
 		});
 	};
-*/
-	factory.deleteAccount = function ( index ) {
-		var i = index;
-		factory.accounts.splice( index, 1 );
-		for(i; i < factory.accounts.length; i++){
-			factory.accounts[i].index = i;
-		}
 
-	};
+	// factory.deleteAccount = function ( index ) {
+	// 	var i = index;
+	// 	factory.accounts.splice( index, 1 );
+	// 	for(i; i < factory.accounts.length; i++){
+	// 		factory.accounts[i].index = i;
+	// 	}
+
+	// };
 	
 
 	factory.editAccount = function ( account ) {
@@ -100,17 +99,10 @@ angular.module( 'debt-calculator' )
 var accountListController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
 
-	//$scope.totalHouse = 45;
-	//works and display 45 on list page
 	$scope.addNew = "Totals";
 
-	$scope.newAccount = AccountFactory.getNewAccount();
-
-	//(balance1 * APR1)+(balance2 * APR2)+(balance3 * APR3)+... / totalBalance
-
-
 	$scope.blendedAPR = function () {
-		answer0 = 0;
+		var answer0 = 0;
 		for(var i=0, len=$scope.accounts.length; i < len; ++i)
 
 		{
@@ -141,23 +133,19 @@ var accountListController = function( $scope, AccountFactory ) {
 		$scope.newAccount = AccountFactory.getNewAccount();
 	};
 
-	$scope.create = function() {
-		$scope.newAccount.index = AccountFactory.accounts.length;
-		AccountFactory.create( $scope.newAccount );
-
-		$scope.newAccount = AccountFactory.getNewAccount();
-	};
-
 	$scope.editAccount = function( account ) {
 		var selectedAccount = account;
-		console.log(selectedAccount);
 		$scope.newAccount = selectedAccount;
 
-		$scope.deleteAccount(account);
+		//$scope.deleteAccount(account);
 	};
 
 	$scope.deleteAccount = function( account ) {
-		AccountFactory.deleteAccount ( account.index );
+		AccountFactory.deleteAccount ( account );
+	};
+
+	$scope.addAccount = function() {
+		AccountFactory.addAccount();
 	};
 
 	$scope.totalMonthly = function () {
@@ -172,7 +160,7 @@ var accountListController = function( $scope, AccountFactory ) {
 	 return $scope.totalHouse2 ;
 
 	}; //end addNew function
-
+	
 
 }; //end controller accountListController
 
@@ -258,11 +246,6 @@ var reportController = function( $scope, ReportFactory ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'ReportController', reportController );
-/*
-	report-factory.js
-
-	Purpose: Model for the generated report in the system
-*/
 var reportFactory = function( AccountFactory ){
 	var factory = {};
 
@@ -341,3 +324,5 @@ var reportFactory = function( AccountFactory ){
 // Register the factory with angular
 angular.module( 'debt-calculator' )
 	.factory( 'ReportFactory', reportFactory );
+
+})();

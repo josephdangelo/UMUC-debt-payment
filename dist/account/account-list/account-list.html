@@ -3,93 +3,94 @@
 	Purpose: Lists all the accounts currently in the system
 -->
 
-<div> 
-	<div class="page-header">
-		<h2>Account List</h2>
+
+<div class="page-header">
+	<h2>My Accounts</h2>
+</div>
+<div class="row">
+	<div class="col-xs-8"> 
+		<div class="panel panel-default">
+	  		<div class="panel-heading">
+	    		<h3 class="panel-title">
+	    			Accounts
+	    			<button class="btn btn-primary btn-xs pull-right" ng-click="addAccount()">
+	    				<i class="glyphicon glyphicon-plus"></i> Add Account
+	    			</button>
+	    		</h3>
+	  		</div>
+	  		<div class="panel-body">
+	    		<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th width="100">APR</th>
+							<th class="nowrap">Current Balance</th>
+							<th class="nowrap">Monthly Payment</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<!-- Iterate through the accounts in the system and display their information -->
+						<tr ng-repeat="account in accounts" ng-init="editing=!account.name.length">
+							<form novalidate class="css-form">
+								<td class="nowrap">
+									<!-- Account label -->
+									<span ng-show="!editing">{{ account.name }}</span>
+									<!-- Account edit control -->
+									<div class="input-group input-group-sm" ng-show="editing">
+										<input type="text" class="form-control account-input" class="account-input" 
+											ng-model="account.name" placeholder="Account Name" required>
+									</div>
+								</td>
+								<td>
+									<!-- APR label -->
+									<span ng-show="!editing">{{ account.APR }}%</span>
+									<!-- APR Control -->
+									<div class="input-group input-group-sm" ng-show="editing">
+										<input type="text" class="form-control" ng-model="account.APR" 
+											placeholder="APR" aria-describedby="basic-addon0">
+										<span class="input-group-addon" id="basic-addon0">%</span>
+									</div>
+								</td>
+								<td class="snug">
+									<!-- Balance label -->
+									<span ng-show="!editing">{{ account.balance | currency }}</span>
+									<!-- Balance control -->
+									<div class="input-group input-group-sm" ng-show="editing">
+										<span class="input-group-addon" id="basic-addon1">$</span>
+										<input type="text" class="form-control" ng-model="account.balance" placeholder="Balance" aria-describedby="basic-addon1">
+									</div>
+								</td>
+								<td class="snug">
+									<!-- Payment label -->
+									<span ng-show="!editing">{{ account.payment | currency }}</span>
+									<!-- Payment control -->
+									<div class="input-group input-group-sm" ng-show="editing">
+										<span class="input-group-addon" id="basic-addon2">$</span>
+										<input type="text" class="form-control" ng-model="account.payment" placeholder="Min. Payment" aria-describedby="basic-addon2"/>
+									</div>
+								</td>
+
+								<td class="snug account-actions">
+									<!-- Edit -->
+									<i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" 
+										title="Edit this account" ng-click="editing=true" ng-show="!editing"></i>
+									<!-- Save -->
+									<i class="glyphicon glyphicon-ok-sign" ng-click="editing=false" 
+										title="Save this account" ng-show="editing"></i>
+									<!-- Delete -->
+									<i class="glyphicon glyphicon-trash" ng-click="deleteAccount( account )" 
+										title="Delete this account"></i>
+								</td>
+							</form>
+
+						
+						<tr> 
+
+					</tbody>
+				</table>
+	  		</div>
+		</div>
 	</div>
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>APR</th>
-				<th>Current Balance</th>
-				<th>Monthly Payment</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<!-- Iterate through the accounts in the system and display their information -->
-			<tr ng-repeat="account in accounts">
-				<td>{{ account.name }}</td>
-				<td>{{ account.APR }}%</td>
-				<td>{{ account.balance | currency }}</td>
-				<td>{{ account.payment | currency }}</td>
-			
-				<td>
-					<a href="" ng-click="editAccount( account )"><i class="glyphicon glyphicon-pencil"></i></a>	
-					<a href="" ng-click="deleteAccount( account )"><i class="glyphicon glyphicon-trash"></i></a>
-				</td>
-			<tr> 
-
-			<!-- Form to take user input -->
-			<form novalidate class="css-form">
-				<!-- ADD Name -->
-				<td><div class="input-group input-group-sm">
-					<input type="text" class="form-control" ng-model="newAccount.name" placeholder="Account Name" required />
-				</div></td>
-				<!-- ADD APR -->
-				<td><div class="input-group input-group-sm">
-					<input type="text" class="form-control" ng-model="newAccount.APR" placeholder="e.g., 5.5" aria-describedby="basic-addon0"/>
-					<span class="input-group-addon" id="basic-addon0">%</span>
-				</div></td>
-				<!-- ADD Balance -->
-				<td class="input-group input-group-sm"> 
-					<span class="input-group-addon" id="basic-addon1">$</span>
-					<input type="text" class="form-control" ng-model="newAccount.balance" placeholder="e.g., 1,500" aria-describedby="basic-addon1"/>
-				</td>
-				<!-- ADD Payment -->
-				<td><div class="input-group input-group-sm">
-					<span class="input-group-addon" id="basic-addon2">$</span>
-					<input type="text" class="form-control" ng-model="newAccount.payment" placeholder="e.g., 25.00" aria-describedby="basic-addon2"/>
-				</div></td>
-
-				<td>
-					<a href="" ng-click="reset()"><i class="glyphicon glyphicon-refresh" ></i></a>
-					<a href="" ng-click="create()"><i class="glyphicon glyphicon-ok-sign"></i></a>
-				</td>
-			</form>
-			<style type="text/css">
-				.css-form input.ng-invalid.ng-touched {
-					background-color: #FA787E;
-				}
-				.css-form input.ng-valid.ng-touched {
-					background-color: #78FA89;
-				}
-			</style>
-			</tbody>
-		</table>
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Blended APR</th>
-					<th>Total Balance</th>
-					<th>Total Monthly Payment</th>
-				</tr>
-			</thead>
-				<tbody></tbody>
-			<tfoot>
-				
-					<th> </th>
-
-					
-					<th>{{ blendedAPR() / totalBalance() | number:2}}%</th>
-					<th>{{ totalBalance() | currency }}</th>
-					<th>{{ totalMonthly() | currency }}</th>
-
-			</tfoot>
-			
-	</table>
+	<div class="col-xs-4" ng-include="'account/account-list/account-summary.html'"></div>
 </div>

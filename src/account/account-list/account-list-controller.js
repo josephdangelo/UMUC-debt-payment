@@ -1,17 +1,10 @@
 var accountListController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
 
-	//$scope.totalHouse = 45;
-	//works and display 45 on list page
 	$scope.addNew = "Totals";
 
-	$scope.newAccount = AccountFactory.getNewAccount();
-
-	//(balance1 * APR1)+(balance2 * APR2)+(balance3 * APR3)+... / totalBalance
-
-
 	$scope.blendedAPR = function () {
-		answer0 = 0;
+		var answer0 = 0;
 		for(var i=0, len=$scope.accounts.length; i < len; ++i)
 
 		{
@@ -42,23 +35,19 @@ var accountListController = function( $scope, AccountFactory ) {
 		$scope.newAccount = AccountFactory.getNewAccount();
 	};
 
-	$scope.create = function() {
-		$scope.newAccount.index = AccountFactory.accounts.length;
-		AccountFactory.create( $scope.newAccount );
-
-		$scope.newAccount = AccountFactory.getNewAccount();
-	};
-
 	$scope.editAccount = function( account ) {
 		var selectedAccount = account;
-		console.log(selectedAccount);
 		$scope.newAccount = selectedAccount;
 
-		$scope.deleteAccount(account);
+		//$scope.deleteAccount(account);
 	};
 
 	$scope.deleteAccount = function( account ) {
-		AccountFactory.deleteAccount ( account.index );
+		AccountFactory.deleteAccount ( account );
+	};
+
+	$scope.addAccount = function() {
+		AccountFactory.addAccount();
 	};
 
 	$scope.totalMonthly = function () {
@@ -73,7 +62,7 @@ var accountListController = function( $scope, AccountFactory ) {
 	 return $scope.totalHouse2 ;
 
 	}; //end addNew function
-
+	
 
 }; //end controller accountListController
 

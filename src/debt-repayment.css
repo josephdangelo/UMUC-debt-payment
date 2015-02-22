@@ -1,0 +1,32 @@
+.css-form input.ng-invalid.ng-touched {
+	background-color : #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+	background-color : #78FA89;
+}
+
+.nowrap {
+	white-space : nowrap;
+} 
+
+.snug { 
+	width : 1px;
+	white-space : nowrap;
+}
+
+.apr-input {
+	width : 50px ;
+}
+
+.account-input {
+	width: 400px !important;
+}
+
+#application-container {
+	margin : 0 40px 0 40px;
+}
+
+.account-actions i {
+	cursor: pointer;
+}

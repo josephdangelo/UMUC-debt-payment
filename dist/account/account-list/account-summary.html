@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Account Summary</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				<strong># of Accounts</strong>
+			</div>
+			<div class="col-xs-6">
+				{{ accounts.length }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<strong>Blended APR</strong>
+			</div>
+			<div class="col-xs-6">
+				{{ blendedAPR() / totalBalance() | number:2}}%
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<strong>Total Balance</strong>
+			</div>
+			<div class="col-xs-6">
+				{{ totalBalance() | currency }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<strong>Total Monthly Payment</strong>
+			</div>
+			<div class="col-xs-6">
+				{{ totalMonthly() | currency }}
+			</div>
+		</div>
+	</div>
+</div>
