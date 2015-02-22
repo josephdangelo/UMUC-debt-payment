@@ -16,7 +16,7 @@
 				  <div class="form-group">
 				    <label for="extra-payment" class="col-sm-2 control-label">Extra Payment</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="extra-payment" placeholder="Amount">
+				      <input type="text" class="form-control" id="extra-payment" placeholder="Amount"> 
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -44,7 +44,7 @@
 	<div ng-show="reportData.months.length" class="row">
 		<div class="col-sm-offset-1 col-sm-10">
 			<div id="container" style="width: 1200px; height: 400px; margin: 0 auto"></div>
-			<h2>Temporary Monthly Report</h2>
+			<h2>Monthly Report</h2>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -52,7 +52,7 @@
 						<!-- Iterate through the accounts in the system and display their names -->
 						<th ng-repeat="account in reportData.accounts">{{ account }}</th>
 						<th>Total Interest</td>
-						<th>Money Not Applied</td>
+						<!-- <th>Money Not Applied</td> not necessary anymore -->
 					</tr>
 				</thead>
 				<tbody>
@@ -62,7 +62,7 @@
 							{{ item.endingBalance | currency }}
 						</td>
 						<td>{{ month.totalInterest | currency }} </td>
-						<td>{{ month.notApplied | currency }} </td>
+						<!-- <td>{{ month.notApplied | currency }} </td> not necessary anymore -->
 					</tr>
 				</tbody>
 			</table>
