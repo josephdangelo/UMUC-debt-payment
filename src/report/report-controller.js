@@ -1,5 +1,6 @@
 var reportController = function( $scope, ReportFactory ) {
 	$scope.reportData = ReportFactory.reportData;
+	$scope.extraPayment = "";
 	
 	$scope.runReport = function() {
 		// Execute the report in the factory
