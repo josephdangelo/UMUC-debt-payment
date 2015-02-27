@@ -1,8 +1,9 @@
-/*
-	app.js
-
-	Purpose: Defines the angular application and its dependencies
-*/
+/**
+ * @ngdoc overview
+ * @name Accounts
+ * @description
+ * Provides account management for the application
+ */
 
 angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 	.config(function($routeProvider) {

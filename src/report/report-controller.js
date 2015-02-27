@@ -1,3 +1,10 @@
+/**
+ * @ngdoc object
+ * @name Reports.controllers:ReportController
+ * @description
+ * Front-end controller for the reports page in the system
+ */
+ 
 var reportController = function( $scope, ReportFactory ) {
 	$scope.reportData = ReportFactory.reportData;
 	$scope.extraPayment = "";

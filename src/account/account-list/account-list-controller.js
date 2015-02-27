@@ -1,3 +1,10 @@
+/**
+ * @ngdoc object
+ * @name Accounts.controllers:AccountListController
+ * @description
+ * Front-end controller for the list of accounts in the system
+ */
+
 var accountListController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
 

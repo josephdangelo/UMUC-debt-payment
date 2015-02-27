@@ -1,8 +1,9 @@
-/*
-	account-factory.js
-
-	Purpose: Model for the accounts in the system
-*/
+/**
+ * @ngdoc service
+ * @name Accounts.factories:AccountFactory
+ * @description
+ * Provides
+ */
 var accountFactory = function(){
 	var factory = {};
 

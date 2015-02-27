@@ -1,8 +1,10 @@
-/*
-	report-factory.js
+/**
+ * @ngdoc service
+ * @name Reports.factories:ReportFactory
+ * @description
+ * Provides
+ */
 
-	Purpose: Model for the generated report in the system
-*/
 var reportFactory = function( AccountFactory ){ 
 	var factory = {};
 	

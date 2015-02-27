@@ -53,6 +53,21 @@ module.exports = function(grunt) {
     // Removes all contents of the /dist for a clean build
     clean: {
       build: [ 'dist/ ']
+    },
+    // Generates application documentation
+    ngdocs: {
+      options: {
+        dest: 'dist/docs',
+        html5Mode: true,
+        startPage: '/api',
+        title: "Debt Repayment Calculator",
+        titleLink: "/docs/api",
+        bestMatch: true
+      },
+      api: {
+        src: ['src/**/*.js', '!src/**/*.spec.js'],
+        title: 'API Documentation'
+      }
     }
   }); 
 
@@ -63,9 +78,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy'); 
   grunt.loadNpmTasks('grunt-contrib-clean'); 
   grunt.loadNpmTasks('grunt-express'); 
+  grunt.loadNpmTasks('grunt-ngdocs'); 
 
   // Used to build the app
-  grunt.registerTask('build', ['jshint', 'clean:build', 'copy:build', 'concat:build']);
+  grunt.registerTask('build', ['jshint', 'clean:build', 'copy:build', 'concat:build', 'ngdocs']);
   // Starts the webserver
   grunt.registerTask('startup', ['express', 'express-keepalive']);
 };

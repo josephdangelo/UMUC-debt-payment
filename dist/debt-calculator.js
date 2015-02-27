@@ -176,13 +176,6 @@ var navController = function( $scope, $location ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'NavController', navController );
-
-var HowToUseController = function( $scope, AccountFactory ) {
-	$scope.howtouse = AccountFactory.howtouse;
-};
-
-angular.module( 'debt-calculator' )
-	.controller( 'HowToUseController', HowToUseController );
 var reportController = function( $scope, ReportFactory ) {
 	$scope.reportData = ReportFactory.reportData;
 	$scope.extraPayment = "";
