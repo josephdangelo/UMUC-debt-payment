@@ -30,11 +30,11 @@ angular.module( 'debt-calculator' )
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 2000, APR: 20, payment: 100 },
-				{ name: 'Citi Credit Card', balance: 3000, APR: 16, payment: 100 },
-				{ name: 'American Airlines Credit Card', balance: 4000, APR: 12, payment: 100 },
-				{ name: 'Ford Explorer Auto Loan', balance: 20000, APR: 7, payment: 400 },
-				{ name: 'Mortgage', balance: 200000, APR: 3, payment: 1200 }];
+	factory.accounts = [{ name: 'A', balance: 2500, APR: 10, payment: 0 },
+				{ name: 'B', balance: 2000, APR: 16, payment: 0 },
+				{ name: 'C', balance: 3000, APR: 12, payment: 0 },
+				{ name: 'D', balance: 1000, APR: 8, payment: 0 },
+				{ name: 'E', balance: 5000, APR: 4, payment: 0 }];
 
 	factory.addAccount = function() {
 		factory.accounts.push( factory.getNewAccount() );
@@ -247,6 +247,102 @@ var reportFactory = function( AccountFactory ){
 
 	factory.runReport = function() {
 		var totalBalance = 0;
+		
+		// calculation method related code starts here.	
+		// calculation method choice
+		// 0: High APR first; 1: Low Balance First; and 2: Weighted
+		// hard coded calculation
+		var calculationmethod = 2;
+		// sorting code based on calculation method choice
+		var tempapr, tempname, tempbalance, temppayment, check;
+		if ( calculationmethod === 0 ) {
+			// High APR first
+			check = true;
+			for ( var k = 1; k < AccountFactory.accounts.length && check; k++ ) {
+				// array may be sorted and check not needed
+				check = false;
+				// perform k-th pass
+				for ( var j = 0; j < AccountFactory.accounts.length - k; j++ ) {
+					if ( AccountFactory.accounts[j].APR < AccountFactory.accounts[j+1].APR ) {
+						// swapping j-th and j+1-th account information
+						// assign j-th account to temp account
+						tempapr = AccountFactory.accounts[j].APR;
+						tempname = AccountFactory.accounts[j].name;
+						tempbalance = AccountFactory.accounts[j].balance;
+						temppayment = AccountFactory.accounts[j].payment;
+						// assign j+1-th account to j-th account
+						AccountFactory.accounts[j].APR = AccountFactory.accounts[j+1].APR;
+						AccountFactory.accounts[j].name = AccountFactory.accounts[j+1].name;
+						AccountFactory.accounts[j].balance = AccountFactory.accounts[j+1].balance;
+						AccountFactory.accounts[j].payment = AccountFactory.accounts[j+1].payment;
+						// assign temp account to j+1-th account
+						AccountFactory.accounts[j+1].APR = tempapr;
+						AccountFactory.accounts[j+1].name = tempname;
+						AccountFactory.accounts[j+1].balance = tempbalance;
+						AccountFactory.accounts[j+1].payment = temppayment;
+						check = true;
+					}
+				}
+			}
+		} else if ( calculationmethod === 1 ) {
+			// Low balance first
+			check = true;
+			for ( var p = 1; p < AccountFactory.accounts.length && check; p++ ) {
+				// array may be sorted and check not needed
+				check = false;
+				// perform k-th pass
+				for ( var q = 0; q < AccountFactory.accounts.length - p; q++ ) {
+					if ( AccountFactory.accounts[q].balance > AccountFactory.accounts[q+1].balance ) {
+						// swapping j-th and j+1-th account information
+						// assign j-th account to temp account
+						tempapr = AccountFactory.accounts[q].APR;
+						tempname = AccountFactory.accounts[q].name;
+						tempbalance = AccountFactory.accounts[q].balance;
+						temppayment = AccountFactory.accounts[q].payment;
+						// assign j+1-th account to j-th account
+						AccountFactory.accounts[q].APR = AccountFactory.accounts[q+1].APR;
+						AccountFactory.accounts[q].name = AccountFactory.accounts[q+1].name;
+						AccountFactory.accounts[q].balance = AccountFactory.accounts[q+1].balance;
+						AccountFactory.accounts[q].payment = AccountFactory.accounts[q+1].payment;
+						// assign temp account to j+1-th account
+						AccountFactory.accounts[q+1].APR = tempapr;
+						AccountFactory.accounts[q+1].name = tempname;
+						AccountFactory.accounts[q+1].balance = tempbalance;
+						AccountFactory.accounts[q+1].payment = temppayment;
+						check = true;
+					}
+				}
+			}
+		} else if ( calculationmethod === 2 ) {
+			// Low balance first
+			check = true;
+			for ( var x = 1; x < AccountFactory.accounts.length && check; x++ ) {
+				// array may be sorted and check not needed
+				check = false;
+				// perform k-th pass
+				for ( var y = 0; y < AccountFactory.accounts.length - x; y++ ) {
+					if ( ( AccountFactory.accounts[y].payment / AccountFactory.accounts[y].balance ) < ( AccountFactory.accounts[y+1].payment / AccountFactory.accounts[y+1].balance ))  {
+						// swapping j-th and j+1-th account information
+						// assign j-th account to temp account
+						tempapr = AccountFactory.accounts[y].APR;
+						tempname = AccountFactory.accounts[y].name;
+						tempbalance = AccountFactory.accounts[y].balance;
+						temppayment = AccountFactory.accounts[y].payment;
+						// assign j+1-th account to j-th account
+						AccountFactory.accounts[y].APR = AccountFactory.accounts[y+1].APR;
+						AccountFactory.accounts[y].name = AccountFactory.accounts[y+1].name;
+						AccountFactory.accounts[y].balance = AccountFactory.accounts[y+1].balance;
+						AccountFactory.accounts[y].payment = AccountFactory.accounts[y+1].payment;
+						// assign temp account to j+1-th account
+						AccountFactory.accounts[y+1].APR = tempapr;
+						AccountFactory.accounts[y+1].name = tempname;
+						AccountFactory.accounts[y+1].balance = tempbalance;
+						AccountFactory.accounts[y+1].payment = temppayment;
+						check = true;
+					}
+				}
+			}
+		}
 
 		// Initialize the total balance and accounts array
 		angular.forEach( AccountFactory.accounts, function( item, index ) {
@@ -256,8 +352,9 @@ var reportFactory = function( AccountFactory ){
 		
 		// hard coded extra-payment
 		var extrapayment = 1000;
-
+		
 		// Execute the report.  As long as there's a balance, keep iterating.
+		// Minimum payment and interest payment related code starts here.
 		while ( totalBalance ) {
 			// The current report month
 			var reportMonth = {
@@ -326,6 +423,7 @@ var reportFactory = function( AccountFactory ){
 			// Apply rest of extra-payment: the difference between extra-payment and total amountPaid for each account
 			remainder = extrapayment - totalamountPaid;
 			
+			// Extra payment related code starts here.
 			// Pay off accounts using extra-payment.  As long as there's a extra-payment, keep iterating.
 			var index = 0;
 

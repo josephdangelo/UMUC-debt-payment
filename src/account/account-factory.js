@@ -7,11 +7,11 @@
 var accountFactory = function(){
 	var factory = {};
 
-	factory.accounts = [{ name: 'Bank of America Credit Card', balance: 2000, APR: 20, payment: 100 },
-				{ name: 'Citi Credit Card', balance: 3000, APR: 16, payment: 100 },
-				{ name: 'American Airlines Credit Card', balance: 4000, APR: 12, payment: 100 },
-				{ name: 'Ford Explorer Auto Loan', balance: 20000, APR: 7, payment: 400 },
-				{ name: 'Mortgage', balance: 200000, APR: 3, payment: 1200 }];
+	factory.accounts = [{ name: 'A', balance: 2500, APR: 10, payment: 0 },
+				{ name: 'B', balance: 2000, APR: 16, payment: 0 },
+				{ name: 'C', balance: 3000, APR: 12, payment: 0 },
+				{ name: 'D', balance: 1000, APR: 8, payment: 0 },
+				{ name: 'E', balance: 5000, APR: 4, payment: 0 }];
 
 	factory.addAccount = function() {
 		factory.accounts.push( factory.getNewAccount() );
