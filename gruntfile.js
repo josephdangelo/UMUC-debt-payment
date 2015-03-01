@@ -35,7 +35,7 @@ module.exports = function(grunt) {
     copy: {
       // Move all the .html files from /src to /dist
       build: {
-        src: ['**/*.html','**/*.css'],
+        src: ['**/*.html','**/*.css','**/*.pdf'],
         dest: 'dist/',
         expand: true,
         cwd: 'src/'
