@@ -1,40 +1,45 @@
 (function () {
 'use strict';
 angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
-	.config(function($routeProvider) {
-		$routeProvider
-			.when('/accounts', {
-				templateUrl: 'account/account-list/account-list.html',
-				controller: 'AccountListController'
-			})
-			.when('/reports', {
-				templateUrl: 'report/report.html',
-				controller: 'ReportController'
-			})
-			.when('/about', {
-				templateUrl: 'about/about.html',
-				controller: 'AboutController'
-			})
-			.when('/howtouse', {
-				templateUrl: 'howtouse/howtouse.html',
-				controller: 'HowToUseController'
-			})
-			.otherwise({ redirectTo: '/accounts' });
-		})
+.config(function($routeProvider) {
+$routeProvider
+.when('/accounts', {
+templateUrl: 'account/account-list/account-list.html',
+controller: 'AccountListController'
+})
+.when('/reports', {
+templateUrl: 'report/report.html',
+controller: 'ReportController'
+})
+.when('/about', {
+templateUrl: 'about/about.html',
+controller: 'AboutController'
+})
+.when('/howtouse', {
+templateUrl: 'howtouse/howtouse.html',
+controller: 'HowToUseController'
+})
+.when('/splash', {
+templateUrl: 'splash/splash.html'
 
-	.controller('CRTL', function ($scope, $timeout){
-		function switchVariable() {
-				$scope.pageInitialized = true;
-			}
+})
+.otherwise({ redirectTo: '/splash' });
+});
 
-			$timeout(function() {
-				switchVariable();
-			},6000);
+// .controller('CRTL', function ($scope, $timeout){
+// function switchVariable() {
+// $scope.pageInitialized = true;
+// }
 
-		
+// $timeout(function() {
+// switchVariable();
+// },6000);
+var accountEntryController = function( $scope, AccountFactory ) {
+	$scope.accounts = AccountFactory.accounts;
+};
 
-
-		});
+angular.module( 'debt-calculator' )
+	.controller( 'AccountEntryController', accountEntryController );
 var accountFactory = function(){
 	/**
      * @ngdoc property
@@ -166,6 +171,21 @@ angular.module( 'debt-calculator' )
 	.controller( 'AccountListController', accountListController );
 
 var navController = function( $scope, $location ) {
+	// Returns whether the provided path is the current route in the application
+	$scope.isCurrentLocation = function( path ){
+		return $location.path() == path;
+	};
+};
+
+angular.module( 'debt-calculator' )
+	.controller( 'NavController', navController );
+var navController = function( $scope, $location ) {
+// Returns whether the provided path is the current route in the application
+	$scope.isCurrentLocation = function( path ){
+		
+		return '#' + $location.path() == path;
+	};
+	$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
 	$scope.navItems = [
 		{ label: 'Accounts', location: '#/accounts'},
 		{ label: 'Reports', location: '#/reports'},
@@ -173,11 +193,10 @@ var navController = function( $scope, $location ) {
 		{ label: 'About', location: '#/about'},
 		{ label: 'System Documentation', location: '/docs'}
 	];
-
-	// Returns whether the provided path is the current route in the application
-	$scope.isCurrentLocation = function( path ){
-		return '#' + $location.path() == path;
-	};
+	$scope.$on('$routeChangeStart', function(next, current) { 
+	$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
+	});
+	
 };
 
 angular.module( 'debt-calculator' )

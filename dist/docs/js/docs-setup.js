@@ -14,6 +14,15 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "Accounts.controllers:AccountEntryController",
+      "shortName": "AccountEntryController",
+      "type": "object",
+      "moduleName": "Accounts",
+      "shortDescription": "Front-end controller for editing an account",
+      "keywords": "account accounts api controller controllers editing front-end object"
+    },
+    {
+      "section": "api",
       "id": "Accounts.controllers:AccountListController",
       "shortName": "AccountListController",
       "type": "object",
