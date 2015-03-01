@@ -4,18 +4,21 @@
  * @description
  * Front-end controller for the reports page in the system
  */
- 
+
 var reportController = function( $scope, ReportFactory ) {
-	$scope.reportData = ReportFactory.reportData;
-	$scope.extraPayment = "";
+	$scope.reportData 			= ReportFactory.reportData;
+	$scope.extraPayment 		= "";
+	$scope.reportTypes 			= ReportFactory.reportTypes;
+	$scope.selectedReportType 	= {};
 	
 	$scope.runReport = function() {
-		// Execute the report in the factory
-		ReportFactory.runReport();
-
-		// Calculate values for the chart
-		var chartSeries = [];
+		var chartSeries 	= [];
 		var chartCategories = [];
+
+		// Execute the report in the factory
+		ReportFactory.runReport( $scope.selectedReportType );
+
+		$scope.reportData = ReportFactory.reportData;
 
 		// Populate the series array with the account information
 		angular.forEach( ReportFactory.reportData.accounts, function( account, index ) {
@@ -33,6 +36,12 @@ var reportController = function( $scope, ReportFactory ) {
 				chartSeries[ accountNDX ].data.push( account.endingBalance );
 			});
 		});
+
+		Highcharts.setOptions({
+            lang: {
+               thousandsSep: ','
+            }
+        });
 
 		// Initialize the Highchart graph
 		$('#container').highcharts({
@@ -54,7 +63,8 @@ var reportController = function( $scope, ReportFactory ) {
 	            }]
 	        },
 	        tooltip: {
-	            valuePrefix: '$'
+	            valuePrefix: '$',
+	            pointFormat: '{series.name}: <b>${point.y:,.2f}</b><br/>'
 	        },
 	        legend: {
 	            layout: 'vertical',

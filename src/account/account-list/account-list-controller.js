@@ -6,72 +6,65 @@
  */
 
 var accountListController = function( $scope, AccountFactory ) {
+	
 	$scope.accounts = AccountFactory.accounts;
-
-	$scope.addNew = "Totals";
+	$scope.addNew 	= "Totals";
 
 	$scope.blendedAPR = function () {
-		var answer0 = 0;
-		for(var i=0, len=$scope.accounts.length; i < len; ++i)
+		
+		var blendedAPR = 0;
+		
+		angular.forEach( $scope.accounts, function( account ){
 
-		{
-	    	answer0 += (Number($scope.accounts[i].APR)* Number($scope.accounts[i].balance));
-		}
-	 $scope.totalHouse0 = answer0 ;
-
-	// $scope.totalHouse0 = answer0 / $scope.accounts.length;
-	return $scope.totalHouse0;
-	}; //end addNew function
+			blendedAPR += account.APR * account.balance;
+		
+		});
+			
+		return blendedAPR;
+	}; 
 
 
 	$scope.totalBalance = function () {
-		$scope.answer1 = 0;
-		for(var i=0, len=$scope.accounts.length; i < len; ++i)
+		
+		var totalBalance = 0;
+		
+		angular.forEach( $scope.accounts, function( account ){
 
-		{
-	    	$scope.answer1 += Number($scope.accounts[i].balance);
-		}
+	    	totalBalance += account.balance;
+		
+		});
 
-		 $scope.totalHouse1 = $scope.answer1;
-		 return $scope.totalHouse1 ;
+		return totalBalance;
 
-	}; //end addNew function
-
-	$scope.reset = function() {
-
-		$scope.newAccount = AccountFactory.getNewAccount();
-	};
-
-	$scope.editAccount = function( account ) {
-		var selectedAccount = account;
-		$scope.newAccount = selectedAccount;
-
-		//$scope.deleteAccount(account);
 	};
 
 	$scope.deleteAccount = function( account ) {
+
 		AccountFactory.deleteAccount ( account );
+	
 	};
 
 	$scope.addAccount = function() {
+
 		AccountFactory.addAccount();
+	
 	};
 
 	$scope.totalMonthly = function () {
-		$scope.answer2 = 0;
-		for(var i=0, len=$scope.accounts.length; i < len; ++i)
+		
+		var monthlyTotal = 0;
 
-		{
-	    	$scope.answer2 += Number($scope.accounts[i].payment);
-		}
+		angular.forEach( $scope.accounts, function( account ){
+		
+			monthlyTotal += account.payment;
+		
+		});
+	 
+	 	return monthlyTotal;
 
-	 $scope.totalHouse2 = $scope.answer2;
-	 return $scope.totalHouse2 ;
-
-	}; //end addNew function
+	};
 	
-
-}; //end controller accountListController
+}; 
 
 angular.module( 'debt-calculator' )
 	.controller( 'AccountListController', accountListController );

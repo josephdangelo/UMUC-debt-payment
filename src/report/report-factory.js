@@ -5,114 +5,29 @@
  * Provides
  */
 
-var reportFactory = function( AccountFactory ){ 
+var reportFactory = function( AccountFactory, $filter ){ 
 	var factory = {};
 	
-	factory.reportData = { accounts: [], months : [] };
+	factory.reportData  = { accounts: [], months : [] };
+	factory.reportTypes = [
+		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
+		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
+		{ name: "Weighted Algorithm", sortAlgorithm: 'APR', reverse: true }
+	];
 
-	factory.runReport = function() {
+	factory.runReport = function( reportType ) {
+
 		var totalBalance = 0;
-		
-		// calculation method related code starts here.	
-		// calculation method choice
-		// 0: High APR first; 1: Low Balance First; and 2: Weighted
-		// hard coded calculation
-		var calculationmethod = 2;
-		// sorting code based on calculation method choice
-		var tempapr, tempname, tempbalance, temppayment, check;
-		if ( calculationmethod === 0 ) {
-			// High APR first
-			check = true;
-			for ( var k = 1; k < AccountFactory.accounts.length && check; k++ ) {
-				// array may be sorted and check not needed
-				check = false;
-				// perform k-th pass
-				for ( var j = 0; j < AccountFactory.accounts.length - k; j++ ) {
-					if ( AccountFactory.accounts[j].APR < AccountFactory.accounts[j+1].APR ) {
-						// swapping j-th and j+1-th account information
-						// assign j-th account to temp account
-						tempapr = AccountFactory.accounts[j].APR;
-						tempname = AccountFactory.accounts[j].name;
-						tempbalance = AccountFactory.accounts[j].balance;
-						temppayment = AccountFactory.accounts[j].payment;
-						// assign j+1-th account to j-th account
-						AccountFactory.accounts[j].APR = AccountFactory.accounts[j+1].APR;
-						AccountFactory.accounts[j].name = AccountFactory.accounts[j+1].name;
-						AccountFactory.accounts[j].balance = AccountFactory.accounts[j+1].balance;
-						AccountFactory.accounts[j].payment = AccountFactory.accounts[j+1].payment;
-						// assign temp account to j+1-th account
-						AccountFactory.accounts[j+1].APR = tempapr;
-						AccountFactory.accounts[j+1].name = tempname;
-						AccountFactory.accounts[j+1].balance = tempbalance;
-						AccountFactory.accounts[j+1].payment = temppayment;
-						check = true;
-					}
-				}
-			}
-		} else if ( calculationmethod === 1 ) {
-			// Low balance first
-			check = true;
-			for ( var p = 1; p < AccountFactory.accounts.length && check; p++ ) {
-				// array may be sorted and check not needed
-				check = false;
-				// perform k-th pass
-				for ( var q = 0; q < AccountFactory.accounts.length - p; q++ ) {
-					if ( AccountFactory.accounts[q].balance > AccountFactory.accounts[q+1].balance ) {
-						// swapping j-th and j+1-th account information
-						// assign j-th account to temp account
-						tempapr = AccountFactory.accounts[q].APR;
-						tempname = AccountFactory.accounts[q].name;
-						tempbalance = AccountFactory.accounts[q].balance;
-						temppayment = AccountFactory.accounts[q].payment;
-						// assign j+1-th account to j-th account
-						AccountFactory.accounts[q].APR = AccountFactory.accounts[q+1].APR;
-						AccountFactory.accounts[q].name = AccountFactory.accounts[q+1].name;
-						AccountFactory.accounts[q].balance = AccountFactory.accounts[q+1].balance;
-						AccountFactory.accounts[q].payment = AccountFactory.accounts[q+1].payment;
-						// assign temp account to j+1-th account
-						AccountFactory.accounts[q+1].APR = tempapr;
-						AccountFactory.accounts[q+1].name = tempname;
-						AccountFactory.accounts[q+1].balance = tempbalance;
-						AccountFactory.accounts[q+1].payment = temppayment;
-						check = true;
-					}
-				}
-			}
-		} else if ( calculationmethod === 2 ) {
-			// Low balance first
-			check = true;
-			for ( var x = 1; x < AccountFactory.accounts.length && check; x++ ) {
-				// array may be sorted and check not needed
-				check = false;
-				// perform k-th pass
-				for ( var y = 0; y < AccountFactory.accounts.length - x; y++ ) {
-					if ( ( AccountFactory.accounts[y].payment / AccountFactory.accounts[y].balance ) < ( AccountFactory.accounts[y+1].payment / AccountFactory.accounts[y+1].balance ))  {
-						// swapping j-th and j+1-th account information
-						// assign j-th account to temp account
-						tempapr = AccountFactory.accounts[y].APR;
-						tempname = AccountFactory.accounts[y].name;
-						tempbalance = AccountFactory.accounts[y].balance;
-						temppayment = AccountFactory.accounts[y].payment;
-						// assign j+1-th account to j-th account
-						AccountFactory.accounts[y].APR = AccountFactory.accounts[y+1].APR;
-						AccountFactory.accounts[y].name = AccountFactory.accounts[y+1].name;
-						AccountFactory.accounts[y].balance = AccountFactory.accounts[y+1].balance;
-						AccountFactory.accounts[y].payment = AccountFactory.accounts[y+1].payment;
-						// assign temp account to j+1-th account
-						AccountFactory.accounts[y+1].APR = tempapr;
-						AccountFactory.accounts[y+1].name = tempname;
-						AccountFactory.accounts[y+1].balance = tempbalance;
-						AccountFactory.accounts[y+1].payment = temppayment;
-						check = true;
-					}
-				}
-			}
-		}
+		var accounts 	 = $filter( 'orderBy' )( AccountFactory.accounts, reportType.sortAlgorithm );
+
+		factory.reportData = { accounts: [], months : [] };
 
 		// Initialize the total balance and accounts array
-		angular.forEach( AccountFactory.accounts, function( item, index ) {
+		angular.forEach( accounts, function( item, index ) {
+
 			totalBalance += item.balance;
 			factory.reportData.accounts.push( item.name );
+
 		});
 		
 		// hard coded extra-payment
@@ -128,12 +43,13 @@ var reportFactory = function( AccountFactory ){
 				notApplied    : 0, // Money not applied this month
 				accounts	  : [] // Array of account actuals
 			};
+
 			var totalamountPaid = 0;
-			var remainder = 0;
+			var remainder 		= 0;
 
 			// Loop through each account to calculate its maximum of interest and minimum payment for this month
-			for ( var i = 0; i < AccountFactory.accounts.length; i++ ) {
-				var item = AccountFactory.accounts[ i ];
+			for ( var i = 0; i < accounts.length; i++ ) {
+				var item = accounts[ i ];
 				var previousBalance;
 
 				// If this is the first month, the previous balance is the balance entered by the user.  

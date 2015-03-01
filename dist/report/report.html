@@ -8,25 +8,25 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-offset-2 col-sm-8">
+		<div class="col-sm-offset-1 col-sm-6">
 			<div class="panel panel-default">
 			  <div class="panel-heading">Report Criteria</div>
 			  <div class="panel-body">
 				<form class="form-horizontal">
 				  <div class="form-group">
-				    <label for="extra-payment" class="col-sm-2 control-label">Extra Payment</label>
-				    <div class="col-sm-10">
+				    <label for="extra-payment" class="col-sm-4 control-label">Extra Payment</label>
+				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="extra-payment" placeholder="Amount"> 
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="report-type" class="col-sm-2 control-label">Algorithm</label>
-				    <div class="col-sm-10">
-				      <select id="report-type" class="form-control">
-				      	<option></option>
-				      	<option>Lowest Balance</option>
-				      	<option>Highest APR</option>
-				      	<option>Weighted</option>
+				    <label for="report-type" class="col-sm-4 control-label">Algorithm</label>
+				    <div class="col-sm-8">
+				      <select 
+				      	ng-model	= "selectedReportType"
+				      	ng-options	= "reportType.name for reportType in reportTypes"
+				      	class		= "form-control">
+
 				      </select>
 				    </div>
 				  </div>
@@ -51,7 +51,7 @@
 						<th>Month</th>
 						<!-- Iterate through the accounts in the system and display their names -->
 						<th ng-repeat="account in reportData.accounts">{{ account }}</th>
-						<th>Total Interest</td>
+						<th>Monthly Interest Paid</td>
 						<!-- <th>Money Not Applied</td> not necessary anymore -->
 					</tr>
 				</thead>
