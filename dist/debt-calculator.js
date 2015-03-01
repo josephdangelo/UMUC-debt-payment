@@ -1,6 +1,7 @@
 (function () {
 'use strict';
 angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
+
 	.config(function($routeProvider) {
 		$routeProvider
 			.when('/accounts', {
@@ -12,28 +13,15 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				controller: 'ReportController'
 			})
 			.when('/about', {
-				templateUrl: 'about/about.html',
-				controller: 'AboutController'
+				templateUrl: 'about/about.html'
 			})
 			.when('/howtouse', {
-				templateUrl: 'howtouse/howtouse.html',
-				controller: 'HowToUseController'
+				templateUrl: 'howtouse/howtouse.html'
 			})
-			.otherwise({ redirectTo: '/accounts' });
-		})
-
-	.controller('CRTL', function ($scope, $timeout){
-		function switchVariable() {
-				$scope.pageInitialized = true;
-			}
-
-			$timeout(function() {
-				switchVariable();
-			},6000);
-
-		
-
-
+			.when('/splash', {
+				templateUrl: 'splash/splash.html'
+			})
+			.otherwise({ redirectTo: '/splash' });
 		});
 var accountEntryController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
@@ -42,9 +30,18 @@ var accountEntryController = function( $scope, AccountFactory ) {
 angular.module( 'debt-calculator' )
 	.controller( 'AccountEntryController', accountEntryController );
 var accountFactory = function(){
+	/**
+     * @ngdoc property
+     * @name accounts
+     * @propertyOf DebtCalculator.Factories:AccountFactory
+     * @returns {array} The accounts in the system
+     * 
+     * @description
+     * Contains all the accounts that have been entered in the system
+     */
+	var factory = { accounts: []};
 
-	var factory = {};
-
+	// Initialize the accounts array with test data
 	factory.accounts = [
 		{ name: 'A', balance: 2500, APR: 10, payment: 200 },
 		{ name: 'B', balance: 2000, APR: 16, payment: 250 },
@@ -53,46 +50,42 @@ var accountFactory = function(){
 		{ name: 'E', balance: 5000, APR: 4, payment: 300 }
 	];
 
+	/**
+     * @ngdoc method
+     * @name addAccount
+     * @methodOf DebtCalculator.Factories:AccountFactory
+     * @description
+     * Creates a new account object in the account array
+     */
+
 	factory.addAccount = function() {
-		
-		factory.accounts.push( factory.getNewAccount() );
+		// Create a new account object
+		var newAccount = { name : "", balance : "", APR : "", payment : "" };
+
+		// Add it to the account array
+		factory.accounts.push( newAccount );
 	
 	};
 
-	factory.getNewAccount = function() {
-		
-		return angular.copy( 
-			{ name : "", balance : "", APR : "", payment : "" }
-		);
-
-	};
+	/**
+     * @ngdoc method
+     * @name deleteAccount
+     * @methodOf DebtCalculator.Factories:AccountFactory
+     * @param {Object} account - The account object to be deleted
+     * @description
+     * Removes the specified account from the account array
+     */
 
 	factory.deleteAccount = function ( account ) {
-
+		// Iterate through the accounts
 		angular.forEach( factory.accounts, function( item, index ) {
-		
+			// If the current account in the loop is the context account, remove it
 			if ( angular.equals( account, item ) ) {
 			
 				factory.accounts.splice( index, 1 );
 			
 			}
 
-		});
-
-	};
-
-	factory.editAccount = function ( account ) {
-		
-		angular.forEach( factory.accounts, function( item, index) {
-			
-			if ( angular.equals( account, item ) ) {
-				
-				var editAccount = {
-					index : index, name : "newName", APR : "newAPR", balance : "newBalance"
-				};
-				
-				factory.accounts.push( updatedAccount );
-			}
 		});
 
 	};
@@ -106,61 +99,100 @@ angular.module( 'debt-calculator' )
 
 var accountListController = function( $scope, AccountFactory ) {
 	
+	/**
+     * @ngdoc property
+     * @name accounts
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {array} The accounts in the system
+     * 
+     * @description
+     * Reference to AccountFactory.accounts; all the accounts that have been entered into the system
+     */
 	$scope.accounts = AccountFactory.accounts;
-	$scope.addNew 	= "Totals";
+	
+	/**
+     * @ngdoc property
+     * @name blendedAPR
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} Blended APR
+     * 
+     * @description
+     * An APR that reflects the annual interest paid on all accounts, based on the inputted balances and APRs
+     */
+    $scope.blendedAPR 	= 0;
 
-	$scope.blendedAPR = function () {
-		
-		var blendedAPR = 0;
-		
+    /**
+     * @ngdoc property
+     * @name totalBalance
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} The total balance
+     * 
+     * @description
+     * The sum of all account balances that have been inputted by the user
+     */
+	$scope.totalBalance = 0;
+
+	/**
+     * @ngdoc property
+     * @name totalMonthly
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} The total monthly payment
+     * 
+     * @description
+     * The sum of all account minimum payments that have been inputted by the user
+     */
+	$scope.totalMonthly = 0;
+
+	/**
+     * @ngdoc method
+     * @name updateTotals
+     * @methodOf DebtCalculator.Controllers:AccountListController
+     * @description
+     * Calculates the summary values for all accounts; invoked when an account is created or updated
+     */
+
+	$scope.updateTotals = function() {
+		// Reset the calculated values
+		$scope.blendedAPR 	= 0;
+		$scope.totalBalance = 0;
+		$scope.totalMonthly = 0;
+
+		// Iterate through the accounts and calculate these values
 		angular.forEach( $scope.accounts, function( account ){
 
-			blendedAPR += account.APR * account.balance;
-		
+			$scope.blendedAPR 	+= account.APR * account.balance;
+			$scope.totalBalance += Number( account.balance );
+			$scope.totalMonthly += account.payment;
+
 		});
-			
-		return blendedAPR;
-	}; 
-
-
-	$scope.totalBalance = function () {
-		
-		var totalBalance = 0;
-
-		angular.forEach( $scope.accounts, function( item ){
-
-	    	totalBalance += Number( item.balance );
-		
-		});
-
-		return totalBalance;
-
 	};
+
+	// Initialize the account total values
+	$scope.updateTotals();
+
+	/**
+     * @ngdoc method
+     * @name deleteAccount
+     * @methodOf DebtCalculator.Controllers:AccountListController
+     * @param {Object} account The account object to be deleted
+     * @description
+     * Deletes the specified account from AccountFactory.accounts
+     */
 
 	$scope.deleteAccount = function( account ) {
-
 		AccountFactory.deleteAccount ( account );
-	
 	};
+
+	/**
+     * @ngdoc method
+     * @name addAccount
+     * @methodOf DebtCalculator.Controllers:AccountListController
+     * @description
+     * Adds a new account to the accounts array
+     */
 
 	$scope.addAccount = function() {
-
 		AccountFactory.addAccount();
-	
-	};
-
-	$scope.totalMonthly = function () {
-		
-		var monthlyTotal = 0;
-
-		angular.forEach( $scope.accounts, function( account ){
-		
-			monthlyTotal += account.payment;
-		
-		});
-	 
-	 	return monthlyTotal;
-
 	};
 	
 }; 
@@ -177,12 +209,115 @@ var navController = function( $scope, $location ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'NavController', navController );
-var reportController = function( $scope, ReportFactory ) {
-	$scope.reportData 			= ReportFactory.reportData;
-	$scope.extraPayment 		= "";
-	$scope.reportTypes 			= ReportFactory.reportTypes;
-	$scope.selectedReportType 	= {};
+var navController = function( $scope, $location ) {
+
+	/**
+     * @ngdoc method
+     * @name isCurrentLocation
+     * @methodOf DebtCalculator.Controllers:NavController
+     * @returns {boolean} result
+     * @description
+     * Returns whether the provided path is the current route in the application
+     */
 	
+	$scope.isCurrentLocation = function( path ){
+		return '#' + $location.path() == path;
+	};
+
+	/**
+     * @ngdoc property
+     * @name showNavigation
+     * @propertyOf DebtCalculator.Controllers:NavController
+     * @returns {boolean} Whether to show the system navigation
+     * 
+     * @description
+     * Boolean expression for whether to show the system navigation; defaults to whether the initial page view is the splash view
+     */
+	$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
+	
+	/**
+     * @ngdoc property
+     * @name navItems
+     * @propertyOf DebtCalculator.Controllers:NavController
+     * @returns {array} The navigation items in the system
+     * 
+     * @description
+     * Contains all the navigation elements that will be rendered in the application header
+     */
+	$scope.navItems = [
+		{ label: 'Accounts', location: '#/accounts'},
+		{ label: 'Reports', location: '#/reports'},
+		{ label: 'How to Use', location: '#/howtouse'},
+		{ label: 'About', location: '#/about'},
+		{ label: 'System Documentation', location: '/docs'}
+	];
+
+	/* 
+		When a new route is called, determine whether the navigation should be displayed 
+		based on the new route 
+	*/
+	$scope.$on('$routeChangeStart', function(next, current) { 
+		$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
+	});
+
+};
+
+angular.module( 'debt-calculator' )
+	.controller( 'NavController', navController );
+var reportController = function( $scope, ReportFactory ) {
+
+	/**
+     * @ngdoc property
+     * @name reportData
+     * @propertyOf DebtCalculator.Controllers:ReportController
+     * @returns {array} The generated report information 
+     * 
+     * @description
+     * A reference to ReportFactory.reportData; contains generated report information
+     */
+	$scope.reportData 			= ReportFactory.reportData;
+
+	/**
+     * @ngdoc property
+     * @name extraPayment
+     * @propertyOf DebtCalculator.Controllers:ReportController
+     * @returns {number} The extra payment
+     * 
+     * @description
+     * The amount of extra payment that will be provided by the user on a monthly basis for use in the report generation
+     */
+	$scope.extraPayment 		= "";
+
+	/**
+     * @ngdoc property
+     * @name reportTypes
+     * @propertyOf DebtCalculator.Controllers:ReportController
+     * @returns {array} The report types
+     * 
+     * @description
+     * A reference to ReportFactory.reportTypes; contains the valid report types in the system
+     */
+	$scope.reportTypes 			= ReportFactory.reportTypes;
+
+	/**
+     * @ngdoc property
+     * @name selectedReportType
+     * @propertyOf DebtCalculator.Controllers:ReportController
+     * @returns {object} The selected report type
+     * 
+     * @description
+     * The currently selected report type in the user interface; defaults to the first report type
+     */
+	$scope.selectedReportType 	= ReportFactory.reportTypes[ 0 ];
+	
+	/**
+     * @ngdoc method
+     * @name runReport
+     * @methodOf DebtCalculator.Factories:ReportFactory
+     * @param {Object} reportType - The reportType object to run the report against
+     * @description
+     * Executes the report based on the given parameters and sets the factory.reportData property with the results
+     */
 	$scope.runReport = function() {
 		var chartSeries 	= [];
 		var chartCategories = [];
@@ -254,13 +389,42 @@ angular.module( 'debt-calculator' )
 var reportFactory = function( AccountFactory, $filter ){ 
 	var factory = {};
 	
+	/**
+     * @ngdoc property
+     * @name reportData
+     * @propertyOf DebtCalculator.Factories:ReportFactory
+     * @returns {array} The generated report information after runReport() is executed
+     * 
+     * @description
+     * Contains all the information generated after runReport() is executed
+     */
 	factory.reportData  = { accounts: [], months : [] };
-	factory.reportTypes = [
+
+	/**
+     * @ngdoc property
+     * @name reportTypes
+     * @propertyOf DebtCalculator.Factories:ReportFactory
+     * @returns {array} The valid reportTypes
+     * 
+     * @description
+     * The valid report types to execute a report against
+     */
+
+    factory.reportTypes = [
 		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
 		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
 		{ name: "Weighted Algorithm", sortAlgorithm: 'APR', reverse: true }
 	];
 
+	/**
+     * @ngdoc method
+     * @name runReport
+     * @methodOf DebtCalculator.Factories:ReportFactory
+     * @param {Object} reportType - The reportType object to run the report against
+     * @description
+     * Executes the report based on the given parameters and sets the factory.reportData property with the results
+     */
+	
 	factory.runReport = function( reportType ) {
 
 		var totalBalance = 0;

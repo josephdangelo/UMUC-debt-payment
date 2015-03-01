@@ -16,7 +16,7 @@
 				<strong>Blended APR</strong>
 			</div>
 			<div class="col-xs-6">
-				{{ blendedAPR() / totalBalance() | number:2}}%
+				{{ blendedAPR / totalBalance | number:2}}%
 			</div>
 		</div>
 		<div class="row">
@@ -24,7 +24,7 @@
 				<strong>Total Balance</strong>
 			</div>
 			<div class="col-xs-6">
-				{{ totalBalance() | currency }}
+				{{ totalBalance | currency }}
 			</div>
 		</div>
 		<div class="row">
@@ -32,7 +32,7 @@
 				<strong>Total Monthly Payment</strong>
 			</div>
 			<div class="col-xs-6">
-				{{ totalMonthly() | currency }}
+				{{ totalMonthly | currency }}
 			</div>
 		</div>
 	</div>

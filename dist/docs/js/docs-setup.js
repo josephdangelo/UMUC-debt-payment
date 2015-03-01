@@ -5,15 +5,6 @@ NG_DOCS={
   "pages": [
     {
       "section": "api",
-      "id": "Accounts",
-      "shortName": "Accounts",
-      "type": "overview",
-      "moduleName": "Accounts",
-      "shortDescription": "Provides account management for the application",
-      "keywords": "account accounts api application management overview"
-    },
-    {
-      "section": "api",
       "id": "Accounts.controllers:AccountEntryController",
       "shortName": "AccountEntryController",
       "type": "object",
@@ -23,39 +14,57 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "Accounts.controllers:AccountListController",
+      "id": "DebtCalculator",
+      "shortName": "DebtCalculator",
+      "type": "overview",
+      "moduleName": "DebtCalculator",
+      "shortDescription": "Provides account management for the application",
+      "keywords": "account api application debtcalculator management overview"
+    },
+    {
+      "section": "api",
+      "id": "DebtCalculator.Controllers:AccountListController",
       "shortName": "AccountListController",
       "type": "object",
-      "moduleName": "Accounts",
+      "moduleName": "DebtCalculator",
       "shortDescription": "Front-end controller for the list of accounts in the system",
-      "keywords": "accounts api controller controllers front-end list object system"
+      "keywords": "account accountfactory accounts addaccount adds annual api apr aprs array balance balances based blended blendedapr calculates controller controllers created debtcalculator deleteaccount deleted deletes entered front-end inputted interest invoked list method minimum monthly object paid payment payments property reference reflects sum summary system total totalbalance totalmonthly updated updatetotals user values"
     },
     {
       "section": "api",
-      "id": "Accounts.factories:AccountFactory",
-      "shortName": "AccountFactory",
-      "type": "service",
-      "moduleName": "Accounts",
-      "shortDescription": "Provides",
-      "keywords": "accounts api factories service"
+      "id": "DebtCalculator.Controllers:NavController",
+      "shortName": "NavController",
+      "type": "object",
+      "moduleName": "DebtCalculator",
+      "shortDescription": "Front-end controller for the application navigation",
+      "keywords": "api application boolean controller controllers current debtcalculator defaults elements expression front-end header initial iscurrentlocation items method navigation navitems object path property provided rendered result returns route shownavigation splash system view"
     },
     {
       "section": "api",
-      "id": "Reports.controllers:ReportController",
+      "id": "DebtCalculator.Controllers:ReportController",
       "shortName": "ReportController",
       "type": "object",
-      "moduleName": "Reports",
+      "moduleName": "DebtCalculator",
       "shortDescription": "Front-end controller for the reports page in the system",
-      "keywords": "api controller controllers front-end object reports system"
+      "keywords": "amount api basis controller controllers currently debtcalculator defaults extra extrapayment front-end generated generation interface monthly object payment property provided reference report reportdata reportfactory reports reporttypes selected selectedreporttype system type types user valid"
     },
     {
       "section": "api",
-      "id": "Reports.factories:ReportFactory",
+      "id": "DebtCalculator.Factories:AccountFactory",
+      "shortName": "AccountFactory",
+      "type": "service",
+      "moduleName": "DebtCalculator",
+      "shortDescription": "Singleton used to manage accounts in the system",
+      "keywords": "account accounts addaccount api array creates debtcalculator deleteaccount deleted entered factories manage method object property removes service singleton system"
+    },
+    {
+      "section": "api",
+      "id": "DebtCalculator.Factories:ReportFactory",
       "shortName": "ReportFactory",
       "type": "service",
-      "moduleName": "Reports",
-      "shortDescription": "Provides",
-      "keywords": "api factories reports service"
+      "moduleName": "DebtCalculator",
+      "shortDescription": "Creates and manages report data based on data in the AccountFactory ",
+      "keywords": "accountfactory api based creates data debtcalculator execute executed executes factories factory generated manages method object parameters property report reportdata reporttype reporttypes runreport service sets types valid"
     }
   ],
   "apis": {

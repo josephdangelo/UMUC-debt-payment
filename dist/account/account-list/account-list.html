@@ -106,7 +106,7 @@
 									<i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" 
 										title="Edit this account" ng-click="editing=true" ng-show="!editing"></i>
 									<!-- Save -->
-									<i class="glyphicon glyphicon-ok-sign" ng-click="editing=false" 
+									<i class="glyphicon glyphicon-ok-sign" ng-click="editing=false;updateTotals()" 
 										title="Save this account" ng-show="editing"></i>
 									<!-- Delete -->
 									<i class="glyphicon glyphicon-trash" ng-click="deleteAccount( account )" 

@@ -1,11 +1,12 @@
 /**
  * @ngdoc overview
- * @name Accounts
+ * @name DebtCalculator
  * @description
  * Provides account management for the application
  */
 
 angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
+
 	.config(function($routeProvider) {
 		$routeProvider
 			.when('/accounts', {
@@ -17,26 +18,13 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				controller: 'ReportController'
 			})
 			.when('/about', {
-				templateUrl: 'about/about.html',
-				controller: 'AboutController'
+				templateUrl: 'about/about.html'
 			})
 			.when('/howtouse', {
-				templateUrl: 'howtouse/howtouse.html',
-				controller: 'HowToUseController'
+				templateUrl: 'howtouse/howtouse.html'
 			})
-			.otherwise({ redirectTo: '/accounts' });
-		})
-
-	.controller('CRTL', function ($scope, $timeout){
-		function switchVariable() {
-				$scope.pageInitialized = true;
-			}
-
-			$timeout(function() {
-				switchVariable();
-			},6000);
-
-		
-
-
+			.when('/splash', {
+				templateUrl: 'splash/splash.html'
+			})
+			.otherwise({ redirectTo: '/splash' });
 		});
