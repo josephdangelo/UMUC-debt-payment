@@ -30,3 +30,29 @@
 .account-actions i {
 	cursor: pointer;
 }
+
+/*MLA additions for Splash Page*/
+
+.img-overlay img {
+margin: 0;
+opacity: 0.5;
+display: block;
+}
+.overlay {
+text-align: center;
+position:relative;
+top: -400px;
+bottom: 0;
+right: 0;
+left: 0;
+width: 100%;
+height: 100%
+background-color: rgba(255,255,255,0.5);
+}
+.img-overlay
+{
+position: relative;
+/* border: 3px #000 solid;*/
+display: block;
+float: left;
+}
