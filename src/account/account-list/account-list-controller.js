@@ -27,10 +27,10 @@ var accountListController = function( $scope, AccountFactory ) {
 	$scope.totalBalance = function () {
 		
 		var totalBalance = 0;
-		
-		angular.forEach( $scope.accounts, function( account ){
 
-	    	totalBalance += account.balance;
+		angular.forEach( $scope.accounts, function( item ){
+
+	    	totalBalance += Number( item.balance );
 		
 		});
 

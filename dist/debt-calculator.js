@@ -126,10 +126,10 @@ var accountListController = function( $scope, AccountFactory ) {
 	$scope.totalBalance = function () {
 		
 		var totalBalance = 0;
-		
-		angular.forEach( $scope.accounts, function( account ){
 
-	    	totalBalance += account.balance;
+		angular.forEach( $scope.accounts, function( item ){
+
+	    	totalBalance += Number( item.balance );
 		
 		});
 
@@ -301,15 +301,15 @@ var reportFactory = function( AccountFactory, $filter ){
 				// If this is the first month, the previous balance is the balance entered by the user.  
 				// Otherwise get the ending balance from the previous month
 				if ( factory.reportData.months.length ) {
-					previousBalance = factory.reportData.months[ factory.reportData.months.length - 1 ].accounts[ i ].endingBalance;
+					previousBalance = Number( factory.reportData.months[ factory.reportData.months.length - 1 ].accounts[ i ].endingBalance );
 				} else {
-					previousBalance = item.balance;
+					previousBalance = Number( item.balance );
 				}
 				
 				var amountPaid = 0;
 				
 				// Calculate interest to be paid (here, the assumption is interest is added 1st day of each month)
-				var interestPaid = ( ( item.APR / 100 ) / 12 ) * previousBalance;
+				var interestPaid = ( ( Number( item.APR ) / 100 ) / 12 ) * previousBalance;
 				
 				// Calculate balance including interest to be paid
 				previousBalance += interestPaid;
@@ -317,13 +317,13 @@ var reportFactory = function( AccountFactory, $filter ){
 				// Determine the amount that will be paid this month comparing interest to be paid and minimum payment.
 				// The idea is to make sure each account balance does not increase by paying at least interest 
 				if ( previousBalance ) {
-					amountPaid = ( item.payment > interestPaid ) ? item.payment : interestPaid;
+					amountPaid = ( Number( item.payment > interestPaid ) ) ? Number( item.payment ) : interestPaid;
 				}
 
 				// Determine the amount that will be paid this month comparing amountPaid calculated above and balance.  
 				// If the amountPaid exceeds the balance, use the balance.
 				if ( previousBalance ) {
-					amountPaid = ( item.payment > previousBalance ) ? previousBalance : item.payment;
+					amountPaid = ( Number( item.payment ) > previousBalance ) ? previousBalance : Number( item.payment );
 				}
 
 				// Determine what the balance for this account will be after the payment is made
