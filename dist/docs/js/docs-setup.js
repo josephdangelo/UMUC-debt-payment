@@ -14,21 +14,12 @@ NG_DOCS={
     },
     {
       "section": "api",
-      "id": "Accounts.controllers:AccountEntryController",
-      "shortName": "AccountEntryController",
-      "type": "object",
-      "moduleName": "Accounts",
-      "shortDescription": "Front-end controller for editing an account",
-      "keywords": "account accounts api controller controllers editing front-end object"
-    },
-    {
-      "section": "api",
       "id": "Accounts.controllers:AccountListController",
       "shortName": "AccountListController",
       "type": "object",
       "moduleName": "Accounts",
       "shortDescription": "Front-end controller for the list of accounts in the system",
-      "keywords": "accounts api controller controllers front-end list object system"
+      "keywords": "account accountfactory accounts addaccount adds api array calculates controller controllers created deleteaccount deleted deletes front-end invoked list method object summary system updated updatetotals values"
     },
     {
       "section": "api",
@@ -36,8 +27,8 @@ NG_DOCS={
       "shortName": "AccountFactory",
       "type": "service",
       "moduleName": "Accounts",
-      "shortDescription": "Provides",
-      "keywords": "accounts api factories service"
+      "shortDescription": "Singleton used to manage accounts in the system",
+      "keywords": "account accounts addaccount api array creates deleteaccount deleted factories manage method object property removes service singleton system"
     },
     {
       "section": "api",
