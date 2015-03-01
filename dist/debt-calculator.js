@@ -12,12 +12,10 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				controller: 'ReportController'
 			})
 			.when('/about', {
-				templateUrl: 'about/about.html',
-				controller: 'AboutController'
+				templateUrl: 'about/about.html'
 			})
 			.when('/howtouse', {
-				templateUrl: 'howtouse/howtouse.html',
-				controller: 'HowToUseController'
+				templateUrl: 'howtouse/howtouse.html'
 			})
 			.otherwise({ redirectTo: '/accounts' });
 		})
@@ -39,9 +37,11 @@ var accountFactory = function(){
 	/**
      * @ngdoc property
      * @name accounts
-     * @propertyOf Accounts.factories:AccountFactory
+     * @propertyOf DebtCalculator.Factories:AccountFactory
+     * @returns {array} The accounts in the system
+     * 
      * @description
-     * Creates a new account object in the account array
+     * Contains all the accounts that have been entered in the system
      */
 	var factory = { accounts: []};
 
@@ -57,7 +57,7 @@ var accountFactory = function(){
 	/**
      * @ngdoc method
      * @name addAccount
-     * @methodOf Accounts.factories:AccountFactory
+     * @methodOf DebtCalculator.Factories:AccountFactory
      * @description
      * Creates a new account object in the account array
      */
@@ -74,7 +74,7 @@ var accountFactory = function(){
 	/**
      * @ngdoc method
      * @name deleteAccount
-     * @methodOf Accounts.factories:AccountFactory
+     * @methodOf DebtCalculator.Factories:AccountFactory
      * @param {Object} account - The account object to be deleted
      * @description
      * Removes the specified account from the account array
@@ -103,21 +103,60 @@ angular.module( 'debt-calculator' )
 
 var accountListController = function( $scope, AccountFactory ) {
 	
+	/**
+     * @ngdoc property
+     * @name accounts
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {array} The accounts in the system
+     * 
+     * @description
+     * Reference to AccountFactory.accounts; all the accounts that have been entered into the system
+     */
 	$scope.accounts = AccountFactory.accounts;
 	
-	$scope.blendedAPR 	= 0;
+	/**
+     * @ngdoc property
+     * @name blendedAPR
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} Blended APR
+     * 
+     * @description
+     * An APR that reflects the annual interest paid on all accounts, based on the inputted balances and APRs
+     */
+    $scope.blendedAPR 	= 0;
+
+    /**
+     * @ngdoc property
+     * @name totalBalance
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} The total balance
+     * 
+     * @description
+     * The sum of all account balances that have been inputted by the user
+     */
 	$scope.totalBalance = 0;
+
+	/**
+     * @ngdoc property
+     * @name totalMonthly
+     * @propertyOf DebtCalculator.Controllers:AccountListController
+     * @returns {number} The total monthly payment
+     * 
+     * @description
+     * The sum of all account minimum payments that have been inputted by the user
+     */
 	$scope.totalMonthly = 0;
 
 	/**
      * @ngdoc method
      * @name updateTotals
-     * @methodOf Accounts.controllers:AccountListController
+     * @methodOf DebtCalculator.Controllers:AccountListController
      * @description
      * Calculates the summary values for all accounts; invoked when an account is created or updated
      */
 
 	$scope.updateTotals = function() {
+		// Reset the calculated values
 		$scope.blendedAPR 	= 0;
 		$scope.totalBalance = 0;
 		$scope.totalMonthly = 0;
@@ -138,8 +177,8 @@ var accountListController = function( $scope, AccountFactory ) {
 	/**
      * @ngdoc method
      * @name deleteAccount
-     * @methodOf Accounts.controllers:AccountListController
-     * @param {Object} account - The account object to be deleted
+     * @methodOf DebtCalculator.Controllers:AccountListController
+     * @param {Object} account The account object to be deleted
      * @description
      * Deletes the specified account from AccountFactory.accounts
      */
@@ -151,7 +190,7 @@ var accountListController = function( $scope, AccountFactory ) {
 	/**
      * @ngdoc method
      * @name addAccount
-     * @methodOf Accounts.controllers:AccountListController
+     * @methodOf DebtCalculator.Controllers:AccountListController
      * @description
      * Adds a new account to the accounts array
      */
@@ -166,6 +205,18 @@ angular.module( 'debt-calculator' )
 	.controller( 'AccountListController', accountListController );
 
 var navController = function( $scope, $location ) {
+
+	$scope.showNavigation = false;
+	/**
+     * @ngdoc property
+     * @name navItems
+     * @propertyOf DebtCalculator.Controllers:NavController
+     * @returns {array} The navigation items in the system
+     * 
+     * @description
+     * Contains all the navigation elements that will be rendered in the application header
+     */
+
 	$scope.navItems = [
 		{ label: 'Accounts', location: '#/accounts'},
 		{ label: 'Reports', location: '#/reports'},
@@ -174,7 +225,19 @@ var navController = function( $scope, $location ) {
 		{ label: 'System Documentation', location: '/docs'}
 	];
 
-	// Returns whether the provided path is the current route in the application
+	$scope.$on('$routeChangeStart', function(next, current) { 
+		$scope.showNavigation = $scope.isCurrentLocation( '/accounts');
+	});
+
+	/**
+     * @ngdoc method
+     * @name isCurrentLocation
+     * @methodOf DebtCalculator.Controllers:NavController
+     * @returns {boolean} result
+     * @description
+     * Returns whether the provided path is the current route in the application
+     */
+	
 	$scope.isCurrentLocation = function( path ){
 		return '#' + $location.path() == path;
 	};

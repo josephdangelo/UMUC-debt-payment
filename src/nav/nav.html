@@ -4,7 +4,7 @@
 	Purpose: Header and navigation elements for the application
 -->
 
-<nav class="navbar navbar-default" ng-controller="NavController">
+<nav class="navbar navbar-default" ng-controller="NavController" ng-show="showNavigation">
   <div class="container-fluid">
     <!-- Grouping nav elements for collapse / toggling on mobile display -->
     <div class="navbar-header">
@@ -23,6 +23,9 @@
         <li ng-class="{ active: isCurrentLocation( item.location ) }" ng-repeat="item in navItems">
           <a href="{{ item.location }}">{{ item.label }}</a>
         </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/docs" target="_blank">View System Documentation</a></li>
       </ul>
     </div>
   </div>

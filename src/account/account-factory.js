@@ -1,6 +1,6 @@
 /**
  * @ngdoc service
- * @name Accounts.factories:AccountFactory
+ * @name DebtCalculator.Factories:AccountFactory
  * @description
  * Singleton used to manage accounts in the system
  */
@@ -9,9 +9,11 @@ var accountFactory = function(){
 	/**
      * @ngdoc property
      * @name accounts
-     * @propertyOf Accounts.factories:AccountFactory
+     * @propertyOf DebtCalculator.Factories:AccountFactory
+     * @returns {array} The accounts in the system
+     * 
      * @description
-     * Creates a new account object in the account array
+     * Contains all the accounts that have been entered in the system
      */
 	var factory = { accounts: []};
 
@@ -27,7 +29,7 @@ var accountFactory = function(){
 	/**
      * @ngdoc method
      * @name addAccount
-     * @methodOf Accounts.factories:AccountFactory
+     * @methodOf DebtCalculator.Factories:AccountFactory
      * @description
      * Creates a new account object in the account array
      */
@@ -44,7 +46,7 @@ var accountFactory = function(){
 	/**
      * @ngdoc method
      * @name deleteAccount
-     * @methodOf Accounts.factories:AccountFactory
+     * @methodOf DebtCalculator.Factories:AccountFactory
      * @param {Object} account - The account object to be deleted
      * @description
      * Removes the specified account from the account array

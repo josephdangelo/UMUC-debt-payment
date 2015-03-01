@@ -1,6 +1,6 @@
 /**
  * @ngdoc overview
- * @name Accounts
+ * @name DebtCalculator
  * @description
  * Provides account management for the application
  */
@@ -17,12 +17,10 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				controller: 'ReportController'
 			})
 			.when('/about', {
-				templateUrl: 'about/about.html',
-				controller: 'AboutController'
+				templateUrl: 'about/about.html'
 			})
 			.when('/howtouse', {
-				templateUrl: 'howtouse/howtouse.html',
-				controller: 'HowToUseController'
+				templateUrl: 'howtouse/howtouse.html'
 			})
 			.otherwise({ redirectTo: '/accounts' });
 		})

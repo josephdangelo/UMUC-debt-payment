@@ -1,6 +1,6 @@
 /**
  * @ngdoc service
- * @name Reports.factories:ReportFactory
+ * @name DebtCalculator.Factories:ReportFactory
  * @description
  * Provides
  */

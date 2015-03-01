@@ -1,6 +1,6 @@
 /**
  * @ngdoc object
- * @name Reports.controllers:ReportController
+ * @name DebtCalculator.Controllers:ReportController
  * @description
  * Front-end controller for the reports page in the system
  */

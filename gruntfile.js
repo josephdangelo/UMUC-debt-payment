@@ -62,7 +62,9 @@ module.exports = function(grunt) {
         startPage: '/api',
         title: "Debt Repayment Calculator",
         titleLink: "/docs/api",
-        bestMatch: true
+        bestMatch: true,
+        editLink: false,
+        sourceLink: false
       },
       api: {
         src: ['src/**/*.js', '!src/**/*.spec.js'],
