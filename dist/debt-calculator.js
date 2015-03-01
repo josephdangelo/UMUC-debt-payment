@@ -20,6 +20,20 @@ angular.module('debt-calculator',['mgcrea.ngStrap', 'ngRoute'])
 				controller: 'HowToUseController'
 			})
 			.otherwise({ redirectTo: '/accounts' });
+		})
+
+	.controller('CRTL', function ($scope, $timeout){
+		function switchVariable() {
+				$scope.pageInitialized = true;
+			}
+
+			$timeout(function() {
+				switchVariable();
+			},6000);
+
+		
+
+
 		});
 var accountEntryController = function( $scope, AccountFactory ) {
 	$scope.accounts = AccountFactory.accounts;
