@@ -2,19 +2,48 @@
  * @ngdoc service
  * @name DebtCalculator.Factories:ReportFactory
  * @description
- * Provides
+ * Creates and manages report data based on data in the AccountFactory 
  */
 
 var reportFactory = function( AccountFactory, $filter ){ 
 	var factory = {};
 	
+	/**
+     * @ngdoc property
+     * @name reportData
+     * @propertyOf DebtCalculator.Factories:ReportFactory
+     * @returns {array} The generated report information after runReport() is executed
+     * 
+     * @description
+     * Contains all the information generated after runReport() is executed
+     */
 	factory.reportData  = { accounts: [], months : [] };
-	factory.reportTypes = [
+
+	/**
+     * @ngdoc property
+     * @name reportTypes
+     * @propertyOf DebtCalculator.Factories:ReportFactory
+     * @returns {array} The valid reportTypes
+     * 
+     * @description
+     * The valid report types to execute a report against
+     */
+
+    factory.reportTypes = [
 		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
 		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
 		{ name: "Weighted Algorithm", sortAlgorithm: 'APR', reverse: true }
 	];
 
+	/**
+     * @ngdoc method
+     * @name runReport
+     * @methodOf DebtCalculator.Factories:ReportFactory
+     * @param {Object} reportType - The reportType object to run the report against
+     * @description
+     * Executes the report based on the given parameters and sets the factory.reportData property with the results
+     */
+	
 	factory.runReport = function( reportType ) {
 
 		var totalBalance = 0;

@@ -20,6 +20,15 @@ var navController = function( $scope, $location ) {
 		return '#' + $location.path() == path;
 	};
 
+	/**
+     * @ngdoc property
+     * @name showNavigation
+     * @propertyOf DebtCalculator.Controllers:NavController
+     * @returns {boolean} Whether to show the system navigation
+     * 
+     * @description
+     * Boolean expression for whether to show the system navigation; defaults to whether the initial page view is the splash view
+     */
 	$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
 	
 	/**
@@ -39,6 +48,10 @@ var navController = function( $scope, $location ) {
 		{ label: 'System Documentation', location: '/docs'}
 	];
 
+	/* 
+		When a new route is called, determine whether the navigation should be displayed 
+		based on the new route 
+	*/
 	$scope.$on('$routeChangeStart', function(next, current) { 
 		$scope.showNavigation = !$scope.isCurrentLocation( '#/splash');
 	});

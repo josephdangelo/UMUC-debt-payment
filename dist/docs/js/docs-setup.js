@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "object",
       "moduleName": "DebtCalculator",
       "shortDescription": "Front-end controller for the application navigation",
-      "keywords": "api application controller controllers current debtcalculator elements front-end header iscurrentlocation items method navigation navitems object path property provided rendered result returns route system"
+      "keywords": "api application boolean controller controllers current debtcalculator defaults elements expression front-end header initial iscurrentlocation items method navigation navitems object path property provided rendered result returns route shownavigation splash system view"
     },
     {
       "section": "api",
@@ -37,7 +37,7 @@ NG_DOCS={
       "type": "object",
       "moduleName": "DebtCalculator",
       "shortDescription": "Front-end controller for the reports page in the system",
-      "keywords": "api controller controllers debtcalculator front-end object reports system"
+      "keywords": "amount api basis controller controllers currently debtcalculator defaults extra extrapayment front-end generated generation interface monthly object payment property provided reference report reportdata reportfactory reports reporttypes selected selectedreporttype system type types user valid"
     },
     {
       "section": "api",
@@ -54,8 +54,8 @@ NG_DOCS={
       "shortName": "ReportFactory",
       "type": "service",
       "moduleName": "DebtCalculator",
-      "shortDescription": "Provides",
-      "keywords": "api debtcalculator factories service"
+      "shortDescription": "Creates and manages report data based on data in the AccountFactory ",
+      "keywords": "accountfactory api based creates data debtcalculator execute executed executes factories factory generated manages method object parameters property report reportdata reporttype reporttypes runreport service sets types valid"
     }
   ],
   "apis": {
