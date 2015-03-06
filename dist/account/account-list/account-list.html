@@ -39,7 +39,11 @@
 									<!-- Account label -->
 									<span ng-show="!editing">{{ account.name }}</span>
 									<!-- Account edit control -->
-									<div class="input-group input-group-sm" ng-show="editing">
+									<div
+										class 		= "input-group input-group-sm"
+										ng-show 	= "editing"
+										ng-class 	= "{ 'has-error' : account_form.accountName.$invalid }">
+
 										<input
 											type				 = "text"
 											class				 = "form-control"
@@ -55,7 +59,11 @@
 									<!-- APR label -->
 									<span ng-show="!editing">{{ account.APR }}%</span>
 									<!-- APR Control -->
-									<div class="input-group input-group-sm" ng-show="editing">
+									<div 
+										class 		="input-group input-group-sm" 
+										ng-show 	="editing"
+										ng-class 	= "{ 'has-error' : account_form.apr.$invalid }">
+										
 										<input 
 											type 						 	= "number" 
 											name 						 	= "apr" 
@@ -76,8 +84,9 @@
 									<span ng-show="!editing">{{ account.balance | currency }}</span>
 									<!-- Balance control -->
 									<div 
-										class 	= "input-group input-group-sm { 'has-error' : account_form.balance.$dirty }" 
-										ng-show = "editing">
+										class 		= "input-group input-group-sm" 
+										ng-class 	= "{ 'has-error' : account_form.balance.$invalid }" 
+										ng-show 	= "editing">
 										
 										<span 
 											class = "input-group-addon" 
@@ -94,19 +103,19 @@
 											aria-describedby	= "balance-addon"
 											ng-minlength			= "1"
 											ng-required				= "true">
-
-										<div class="error" ng-show="account_form.balance.$dirty && account_form.balance.$invalid">
-											<small class="error" ng-show="account_form.balance.$error.required">
-												<br><br>Balance is required.
-											</small>
 									</div>
 								</td>
 								<td class="snug">
 									<!-- Payment label -->
 									<span ng-show="!editing">{{ account.payment | currency }}</span>
 									<!-- Payment control -->
-									<div class="input-group input-group-sm" ng-show="editing">
+									<div 
+										class 		= "input-group input-group-sm"
+										ng-class 	= "{ 'has-error' : account_form.payment.$invalid }"
+										ng-show 	= "editing">
+
 										<span class="input-group-addon" id="payment-addon">$</span>
+										
 										<input
 											type							= "number"
 											name							= "payment"
