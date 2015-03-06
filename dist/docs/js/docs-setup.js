@@ -5,15 +5,6 @@ NG_DOCS={
   "pages": [
     {
       "section": "api",
-      "id": "Accounts.controllers:AccountEntryController",
-      "shortName": "AccountEntryController",
-      "type": "object",
-      "moduleName": "Accounts",
-      "shortDescription": "Front-end controller for editing an account",
-      "keywords": "account accounts api controller controllers editing front-end object"
-    },
-    {
-      "section": "api",
       "id": "DebtCalculator",
       "shortName": "DebtCalculator",
       "type": "overview",
@@ -64,7 +55,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "DebtCalculator",
       "shortDescription": "Creates and manages report data based on data in the AccountFactory ",
-      "keywords": "accountfactory api based creates data debtcalculator execute executed executes factories factory generated manages method object parameters property report reportdata reporttype reporttypes runreport service sets types valid"
+      "keywords": "accountfactory api based chart chartseries creates data debtcalculator execute executed executes factories factory generate generated manages method months object parameters property report reportdata reporttype reporttypes respective runreport series service sets types unique valid x-axis"
     }
   ],
   "apis": {

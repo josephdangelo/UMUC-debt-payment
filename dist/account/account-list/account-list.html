@@ -19,15 +19,15 @@
 	    		</h3>
 	  		</div>
 	  		<div class="panel-body">
-	  		{{input_form.apr.$dirty}} APR
+	  		
 	  		<form name="input_form" novalidate class="css-form">
 	    		<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th width="100">APR</th>
-							<th class="nowrap">Current Balance</th>
-							<th class="nowrap">Monthly Payment</th>
+							<th width="150">APR</th>
+							<th class="nowrap" width="175">Current Balance</th>
+							<th class="nowrap" width="175">Monthly Payment</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,12 +40,15 @@
 									<span ng-show="!editing">{{ account.name }}</span>
 									<!-- Account edit control -->
 									<div class="input-group input-group-sm" ng-show="editing">
-										<input type="text" class="form-control account-input" class="account-input" 
-											ng-model="account.name" placeholder="Account Name" name="account_name" required>
-											<div class="error" ng-show="account_form.account_name.$dirty && account_form.account_name.$invalid">
-											<small class="error" ng-show="account_form.account_name.$error.required">
-												<br><br>Name is required.
-											</small>
+										<input
+											type				 = "text"
+											class				 = "form-control"
+											ng-model		 = "account.name"
+											placeholder	 = "Account Name"
+											name				 = "accountName"
+											ng-required  = "true"
+											ng-minlength = "1">
+											{{ account_form.$hasError }}
 									</div>
 								</td>
 								<td>
@@ -53,20 +56,18 @@
 									<span ng-show="!editing">{{ account.APR }}%</span>
 									<!-- APR Control -->
 									<div class="input-group input-group-sm" ng-show="editing">
-										<input type="text" name="apr" class="form-control" ng-model="account.APR" placeholder="APR" aria-describedby="basic-addon0" ng-minlength=1 ng-maxlength=2 required>
-											<div class="error" ng-show="account_form.apr.$dirty && account_form.apr.$invalid">
-											<small class="error" ng-show="account_form.apr.$error.required">
-												APR is required.
-											</small>
-											<small class="error" ng-show="account_form.apr.$error.minlength"> 
-											   APR is required to be at least 1 character.
-											</small>
-											<small class="error" ng-show="account_form.apr.$error.maxlength">	
-												Your name cannot be longer than 2 characters.
-											</small>
-							
-											</div>
-										<span class="input-group-addon" id="basic-addon0">%</span>
+										<input 
+											type 						 	= "number" 
+											name 						 	= "apr" 
+											class 					 	= "form-control" 
+											ng-model 					= "account.APR" 
+											placeholder 			= "APR" 
+											aria-describedby 	= "apr-addon" 
+											min 							= "0"
+											max 							= "100"
+											ng-required				= "true">
+											
+										<span class="input-group-addon" id="apr-addon">%</span>
 
 									</div>
 								</td>
@@ -74,17 +75,30 @@
 									<!-- Balance label -->
 									<span ng-show="!editing">{{ account.balance | currency }}</span>
 									<!-- Balance control -->
-									<div class="input-group input-group-sm" ng-show="editing">
-										<span class="input-group-addon" id="basic-addon1">$</span>
-										<input type="text" name="balance" class="form-control" ng-model="account.balance" placeholder="Balance" aria-describedby="basic-addon1" ng-minlength=1 required>
+									<div 
+										class 	= "input-group input-group-sm { 'has-error' : account_form.balance.$dirty }" 
+										ng-show = "editing">
+										
+										<span 
+											class = "input-group-addon" 
+											id 		= "balance-addon">$</span>
+
+										<input 
+											type 							= "number"
+											name 							= "balance"
+											class 						= "form-control"
+											ng-model 					= "account.balance"
+											placeholder 			= "Balance"
+											min 							= "0"
+											max 							= "999999999"
+											aria-describedby	= "balance-addon"
+											ng-minlength			= "1"
+											ng-required				= "true">
+
 										<div class="error" ng-show="account_form.balance.$dirty && account_form.balance.$invalid">
 											<small class="error" ng-show="account_form.balance.$error.required">
 												<br><br>Balance is required.
 											</small>
-											<!--<small class="error" ng-show="account_form.balance.$error.minlength"> 
-											   Balance is required to be at least 1 character.
-											</small> -->
-
 									</div>
 								</td>
 								<td class="snug">
@@ -92,12 +106,17 @@
 									<span ng-show="!editing">{{ account.payment | currency }}</span>
 									<!-- Payment control -->
 									<div class="input-group input-group-sm" ng-show="editing">
-										<span class="input-group-addon" id="basic-addon2">$</span>
-										<input type="text" name="minPay"class="form-control" ng-model="account.payment" placeholder="Min. Payment" aria-describedby="basic-addon2" required>
-										<div class="error" ng-show="account_form.minPay.$dirty && account_form.minPay.$invalid">
-											<small class="error" ng-show="account_form.minPay.$error.required">
-												<br><br>Minimum payment amount<br>is required.
-											</small>
+										<span class="input-group-addon" id="payment-addon">$</span>
+										<input
+											type							= "number"
+											name							= "payment"
+											class							= "form-control"
+											min 							= "0"
+											max 							= "999999"
+											ng-model					= "account.payment"
+											placeholder				= "Min.Payment"
+											aria-describedby	= "payment-addon"
+											ng-required 			= "true">
 									</div>
 								</td>
 
@@ -107,21 +126,17 @@
 										title="Edit this account" ng-click="editing=true" ng-show="!editing"></i>
 									<!-- Save -->
 									<i class="glyphicon glyphicon-ok-sign" ng-click="editing=false;updateTotals()" 
-										title="Save this account" ng-show="editing"></i>
+										title="Save this account" ng-show="editing && account_form.$valid"></i>
 									<!-- Delete -->
 									<i class="glyphicon glyphicon-trash" ng-click="deleteAccount( account )" 
 										title="Delete this account"></i>
 								</td>
-							
-
-						
 						<tr> 
-
 					</tbody>
 				</table>
-				</form>
-	  		</div>
-		</div>
+			</form>
+  	</div>
 	</div>
-	<div class="col-xs-4" ng-include="'account/account-list/account-summary.html'"></div>
+</div>
+<div class="col-xs-4" ng-include="'account/account-list/account-summary.html'"></div>
 </div>

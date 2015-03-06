@@ -44,8 +44,7 @@ var navController = function( $scope, $location ) {
 		{ label: 'Accounts', location: '#/accounts'},
 		{ label: 'Reports', location: '#/reports'},
 		{ label: 'How to Use', location: '#/howtouse'},
-		{ label: 'About', location: '#/about'},
-		{ label: 'System Documentation', location: '/docs'}
+		{ label: 'About', location: '#/about'}
 	];
 
 	/* 

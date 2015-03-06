@@ -88,7 +88,9 @@ var accountListController = function( $scope, AccountFactory ) {
      */
 
 	$scope.deleteAccount = function( account ) {
-		AccountFactory.deleteAccount ( account );
+          if ( confirm( 'Are you sure you want to delete this account?') ) {
+		   AccountFactory.deleteAccount ( account );
+          }
 	};
 
 	/**

@@ -1,58 +1,16 @@
-.css-form input.ng-invalid.ng-touched {
-	background-color : #FA787E;
-}
+#application-container { margin : 0 40px 0 40px; }
 
-.css-form input.ng-valid.ng-touched {
-	background-color : #78FA89;
-}
+.nowrap { white-space : nowrap; } 
+.snug { width : 1px; white-space : nowrap; }
 
-.nowrap {
-	white-space : nowrap;
-} 
+input[name="apr"] { width : 100px !important; }
+input[name="accountName"] { width : 370px !important; }
+input[name="balance"], input[name="payment"] { width : 100px !important; }
 
-.snug { 
-	width : 1px;
-	white-space : nowrap;
-}
-
-.apr-input {
-	width : 50px ;
-}
-
-.account-input {
-	width: 400px !important;
-}
-
-#application-container {
-	margin : 0 40px 0 40px;
-}
-
-.account-actions i {
-	cursor: pointer;
-}
+.account-actions i { cursor: pointer; }
 
 /*MLA additions for Splash Page*/
 
-.img-overlay img {
-margin: 0;
-opacity: 0.5;
-display: block;
-}
-.overlay {
-text-align: center;
-position:relative;
-top: -400px;
-bottom: 0;
-right: 0;
-left: 0;
-width: 100%;
-height: 100%
-background-color: rgba(255,255,255,0.5);
-}
-.img-overlay
-{
-position: relative;
-/* border: 3px #000 solid;*/
-display: block;
-float: left;
-}
+.img-overlay img { margin: 0; opacity: 0.5; display: block; }
+.overlay { text-align: center; position:relative; top: -400px; bottom: 0; right: 0; left: 0; width: 100%; height: 100% background-color: rgba(255,255,255,0.5); }
+.img-overlay { position: relative; display: block; float: left; }
