@@ -7,6 +7,13 @@
 <div class="page-header">
 	<h2>My Accounts</h2>
 </div>
+<p class="text-muted">
+	Enter all of your current installment account information in the table below in order to run your calculations. 
+</p>
+<p class="text-danger">
+	<strong>Caution: </strong>The Debt Repayment Calculator does not store your information in any way to keep your information safe, but this means you will lose your data if you navigate away from this page.
+</p>
+
 <div class="row">
 	<div class="col-xs-8"> 
 		<div class="panel panel-default">
@@ -52,7 +59,7 @@
 											name				 = "accountName"
 											ng-required  = "true"
 											ng-minlength = "1">
-											{{ account_form.$hasError }}
+											
 									</div>
 								</td>
 								<td>

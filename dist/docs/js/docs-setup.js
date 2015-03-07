@@ -55,7 +55,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "DebtCalculator",
       "shortDescription": "Creates and manages report data based on data in the AccountFactory ",
-      "keywords": "accountfactory api based chart chartseries creates data debtcalculator execute executed executes factories factory generate generated manages method months object parameters property report reportdata reporttype reporttypes respective runreport series service sets types unique valid x-axis"
+      "keywords": "accountfactory accounts api balances based calculatetotalbalance chart chartseries creates current data debtcalculator execute executed executes factories factory generate generated manages method months object parameters property report reportdata reporttype reporttypes respective returns runreport series service sets sum types unique valid x-axis"
     }
   ],
   "apis": {

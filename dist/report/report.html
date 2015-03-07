@@ -16,7 +16,7 @@
 				  <div class="form-group">
 				    <label for="extra-payment" class="col-sm-4 control-label">Extra Payment</label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="extra-payment" placeholder="Amount"> 
+				      <input type="text" class="form-control" ng-model="extraPayment" placeholder="Amount"> 
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -46,22 +46,32 @@
 		<div class="col-sm-offset-1 col-sm-10">
 			<div id="container" style="width: 1200px; height: 400px; margin: 0 auto"></div>
 			<h2>Monthly Report</h2>
-			<table class="table table-striped">
+			<table class="table table-striped table-bordered">
 				<thead>
+					<tr>
+						<th></th>
+						<th ng-repeat="account in reportData.accounts" colspan="2" align="center">{{ account }}</th>
+						<th></th>
+					</tr>
 					<tr>
 						<th>Month</th>
 						<!-- Iterate through the accounts in the system and display their names -->
-						<th ng-repeat="account in reportData.accounts">{{ account }}</th>
+						<th ng-repeat-start="account in reportData.accounts">Payment</th>
+						<th ng-repeat-end>
+							Balance
+						</th>
 						<th>Monthly Interest Paid</td>
 						<!-- <th>Money Not Applied</td> not necessary anymore -->
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="month in reportData.months">
-						<td>{{ $index }}</td>
-						<td ng-repeat="item in month.accounts">
+						<td>{{ month.name }}</td>
+						<td ng-repeat-start="item in month.accounts">{{ item.amountPaid | currency }}</td>
+						<td ng-repeat-end>
 							{{ item.endingBalance | currency }}
 						</td>
+						
 						<td>{{ month.totalInterest | currency }} </td>
 						<!-- <td>{{ month.notApplied | currency }} </td> not necessary anymore -->
 					</tr>

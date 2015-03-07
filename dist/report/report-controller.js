@@ -27,7 +27,7 @@ var reportController = function( $scope, ReportFactory ) {
      * @description
      * The amount of extra payment that will be provided by the user on a monthly basis for use in the report generation
      */
-	$scope.extraPayment 		= "";
+	$scope.extraPayment 		= 500;
 
 	/**
      * @ngdoc property
