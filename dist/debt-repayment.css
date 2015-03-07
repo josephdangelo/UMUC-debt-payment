@@ -1,12 +1,14 @@
 #application-container { margin : 0 40px 0 40px; }
-
+#run-report-button { margin: 25px 0 50px 0;}
 .nowrap { white-space : nowrap; } 
 .snug { width : 1px; white-space : nowrap; }
 
 input[ name = "apr" ] { width : 100px !important; }
 input[ name = "accountName" ] { width : 370px !important; }
 input[ name = "balance" ], input[ name = "payment" ] { width : 100px !important; }
+input[ name = "extraPayment" ] { width : 100px !important; }
 
+dt { margin-top: 5px; }
 .account-actions i { cursor: pointer; }
 
 .img-overlay img { margin: 0; opacity: 0.5; display: block; }

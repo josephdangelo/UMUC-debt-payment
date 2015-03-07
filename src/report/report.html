@@ -6,41 +6,56 @@
 	<div class="page-header">
 		<h2>Reports</h2>
 	</div>
-
 	<div class="row">
-		<div class="col-sm-offset-1 col-sm-6">
-			<div class="panel panel-default">
-			  <div class="panel-heading">Report Criteria</div>
-			  <div class="panel-body">
-				<form class="form-horizontal">
-				  <div class="form-group">
-				    <label for="extra-payment" class="col-sm-4 control-label">Extra Payment</label>
-				    <div class="col-sm-8">
-				      <input type="text" class="form-control" ng-model="extraPayment" placeholder="Amount"> 
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label for="report-type" class="col-sm-4 control-label">Algorithm</label>
-				    <div class="col-sm-8">
-				      <select 
-				      	ng-model	= "selectedReportType"
-				      	ng-options	= "reportType.name for reportType in reportTypes"
-				      	class		= "form-control">
+		<div class="col-sm-8 col-sm-offset-2">
+			<h3>How much money will you be able to spend every month in addition to your minimum monthly payments?</h3>
+			<p>
+				The more you are able to contribute the better, but be sure to use a number that is practical and doesn't cause you to have to incur additional debt if you have unexpected expenses.
+			</p>
+			<div class = "input-group input-group-md" >
+				<span 
+					class = "input-group-addon" 
+					id 	  = "payment-addon">$</span>
 
-				      </select>
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <div class="col-sm-offset-2 col-sm-10">
-				      <button class="btn btn-primary" ng-click="runReport()">Generate Report</button>
-				    </div>
-				  </div>
-				</form>
+				<input 
+					type 				= "text" 
+					name 				= "extraPayment" 
+					class 				= "form-control" 
+					ng-model 			= "extraPayment"
+					aria-describedby	= "payment-addon"
+					placeholder 		= "Amount"> 
 			</div>
+
+			<h3>How do you want to prioritize paying off your accounts?</h3>
+			<p>
+				You can use one of the following algorithms when calculating your repayment schedule:
+				<dl>
+					<dt>Highest APR</dt>
+					<dd>Prioritizes paying off accounts with the highest APR first, which will save you money in interest paid over time.</dd>
+
+					<dt>Lowest Balance</dt>
+					<dd>Prioritizes paying off accounts with lowest balances first, which helps free up financial obligations faster and gives you flexibility if other unexpected expenses come up.  It also allows you to see progress faster, which is preferable for many consumers.</dd>
+
+					<dt>Weighted</dt>
+					<dd>Uses an algorithm that prioritizes lower balances, but also weights those with a higher monthly payment so that you free up more money faster on a monthly basis.  This gives you more unobligated money faster on a monthly basis to deal with unexpected expenses.</dd>
+			</p>
+			<div class = "input-group input-group-md" >
+				<select 
+			      	ng-model	= "selectedReportType"
+			      	ng-options	= "reportType.name for reportType in reportTypes"
+			      	class		= "form-control">
+
+			    </select>
 			</div>
-			
+			<div class="form-group">
+			    <div class="col-sm-offset-5 col-sm-2">
+			      <button class="btn btn-lg btn-primary" ng-click="runReport()" id="run-report-button">Generate Report</button>
+			    </div>
+			  </div>
 		</div>
 	</div>
+	
+	
 	<div ng-show="reportData.months.length" class="row">
 		<!-- Total Interest Paid: {{ reportData.interestPaid }} -->
 		<div class="col-sm-offset-1 col-sm-10">

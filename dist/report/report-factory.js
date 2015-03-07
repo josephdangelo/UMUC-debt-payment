@@ -30,9 +30,11 @@ var reportFactory = function( AccountFactory, $filter ){
      */
 
     factory.reportTypes = [
-		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
-		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
-		{ name: "Weighted Algorithm", sortAlgorithm: 'payment', reverse: true }
+		{ name: "Highest APR First", reverse: true, sortAlgorithm: 'APR' },
+		{ name: "Lowest Balance First", reverse: false, sortAlgorithm: 'balance' },
+		{ name: "Weighted Algorithm", reverse: true, sortAlgorithm: function( account ) {
+			return account.payment / account.balance;
+		}}
 	];
 
 	/**

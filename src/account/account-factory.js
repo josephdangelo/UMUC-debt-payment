@@ -19,11 +19,11 @@ var accountFactory = function(){
 
 	// Initialize the accounts array with test data
 	factory.accounts = [
-		{ name: 'A', balance: 2500, APR: 10, payment: 200 },
-		{ name: 'B', balance: 2000, APR: 16, payment: 250 },
-		{ name: 'C', balance: 3000, APR: 12, payment: 150 },
-		{ name: 'D', balance: 1000, APR: 8, payment: 75 },
-		{ name: 'E', balance: 5000, APR: 4, payment: 300 }
+		{ name: 'Credit Card #1', balance: 2500, APR: 10, payment: 200 },
+		{ name: 'Credit Card #2', balance: 4500, APR: 6.5, payment: 250 },
+		{ name: 'Credit Card #3', balance: 10000, APR: 6.5, payment: 250 },
+		{ name: 'Car', balance: 13000, APR: 2.9, payment: 150 },
+		{ name: 'Student Loan', balance: 5000, APR: 7.5, payment: 300 }
 	];
 
 	/**
