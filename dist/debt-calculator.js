@@ -79,9 +79,21 @@ var accountFactory = function(){
 				factory.accounts.splice( index, 1 );
 			
 			}
-
 		});
+	};
 
+	/**
+     * @ngdoc method
+     * @name deleteAllAccounts
+     * @methodOf DebtCalculator.Factories:AccountFactory
+     * @description
+     * Removes all accounts from the account array
+     */
+	factory.deleteAllAccounts = function() {
+		// Iterate through the accounts and delete them
+		for ( var i = factory.accounts.length - 1; i >= 0; i-- ) {
+			factory.accounts.splice( i, 1 );
+		}
 	};
 
 	return factory;
@@ -161,10 +173,7 @@ var accountListController = function( $scope, AccountFactory ) {
 		});
 	};
 
-	// Initialize the account total values
-	$scope.updateTotals();
-
-	/**
+     /**
      * @ngdoc method
      * @name deleteAccount
      * @methodOf DebtCalculator.Controllers:AccountListController
@@ -176,9 +185,24 @@ var accountListController = function( $scope, AccountFactory ) {
 	$scope.deleteAccount = function( account ) {
           if ( confirm( 'Are you sure you want to delete this account?') ) {
 		   AccountFactory.deleteAccount ( account );
+             $scope.updateTotals();
           }
+
 	};
 
+     /**
+     * @ngdoc method
+     * @name deleteAllAccounts
+     * @methodOf DebtCalculator.Controllers:AccountListController
+     * @description
+     * Removes all accounts from the system
+     */
+     $scope.clear = function() {
+          if ( confirm( 'Are you sure you want to delete all your accounts?  This cannot be undone.') ) {
+               AccountFactory.deleteAllAccounts();
+               $scope.updateTotals();
+          }
+     };
 	/**
      * @ngdoc method
      * @name addAccount
@@ -190,6 +214,9 @@ var accountListController = function( $scope, AccountFactory ) {
 	$scope.addAccount = function() {
 		AccountFactory.addAccount();
 	};
+
+     // Initialize the account total values
+     $scope.updateTotals();
 	
 }; 
 

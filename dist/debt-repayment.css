@@ -11,7 +11,7 @@ input[ name = "accountName" ] { width : 370px !important; }
 input[ name = "balance" ], input[ name = "payment" ] { width : 100px !important; }
 input[ name = "extraPayment" ] { width : 100px !important; }
 .account-actions i { cursor: pointer; }
-
+#remove-all-accounts { margin-left:15px; }
 /* Report page */
 #run-report-button { margin: 25px 0 50px 0; }
 #report-results th { text-align: center; }

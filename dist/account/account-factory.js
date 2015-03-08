@@ -61,9 +61,21 @@ var accountFactory = function(){
 				factory.accounts.splice( index, 1 );
 			
 			}
-
 		});
+	};
 
+	/**
+     * @ngdoc method
+     * @name deleteAllAccounts
+     * @methodOf DebtCalculator.Factories:AccountFactory
+     * @description
+     * Removes all accounts from the account array
+     */
+	factory.deleteAllAccounts = function() {
+		// Iterate through the accounts and delete them
+		for ( var i = factory.accounts.length - 1; i >= 0; i-- ) {
+			factory.accounts.splice( i, 1 );
+		}
 	};
 
 	return factory;
