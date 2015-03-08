@@ -7,9 +7,9 @@ AngularJS also allows the application to be web-based, which means that no moder
 
 This application was created by the CMSC 495 7981 "Debt Repayment App Group" and overseen by Professor Nicholas Duchon.
 
-Team Members
-Matthew Ambs
-Joe D'Angelo
-Yunjung Oh
-Ben Spice
-Arminta Jenkins
+**Team Members**
+- Matthew Ambs
+- Joe D'Angelo
+- Yunjung Oh
+- Ben Spice
+- Arminta Jenkins
