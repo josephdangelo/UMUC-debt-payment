@@ -92,7 +92,6 @@ var reportFactory = function( AccountFactory, $filter ){
 	factory.runReport = function( reportType, extrapayment ) {
 		var accounts 	 	= $filter( 'orderBy' )( angular.copy( AccountFactory.accounts ), reportType.sortAlgorithm, reportType.reverse );
 
-		console.log( accounts );
 		var totalBalance 	= factory.calculateTotalBalance( accounts );
 		
 		factory.reportData 	= { accounts: [], months : [], interestPaid : 0 };
