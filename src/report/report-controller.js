@@ -6,7 +6,7 @@
  */
 
 var reportController = function( $scope, ReportFactory ) {
-
+	$scope.activeTab = 1;
 	/**
      * @ngdoc property
      * @name reportData

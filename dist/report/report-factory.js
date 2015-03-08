@@ -30,9 +30,11 @@ var reportFactory = function( AccountFactory, $filter ){
      */
 
     factory.reportTypes = [
-		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
-		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
-		{ name: "Weighted Algorithm", sortAlgorithm: 'APR', reverse: true }
+		{ name: "Highest APR First", reverse: true, sortAlgorithm: 'APR' },
+		{ name: "Lowest Balance First", reverse: false, sortAlgorithm: 'balance' },
+		{ name: "Weighted Algorithm", reverse: true, sortAlgorithm: function( account ) {
+			return account.payment / account.balance;
+		}}
 	];
 
 	/**
@@ -88,7 +90,9 @@ var reportFactory = function( AccountFactory, $filter ){
      */
 	
 	factory.runReport = function( reportType, extrapayment ) {
-		var accounts 	 	= $filter( 'orderBy' )( AccountFactory.accounts, reportType.sortAlgorithm );
+		var accounts 	 	= $filter( 'orderBy' )( angular.copy( AccountFactory.accounts ), reportType.sortAlgorithm, reportType.reverse );
+
+		console.log( accounts );
 		var totalBalance 	= factory.calculateTotalBalance( accounts );
 		
 		factory.reportData 	= { accounts: [], months : [], interestPaid : 0 };

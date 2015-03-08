@@ -37,11 +37,11 @@ var accountFactory = function(){
 
 	// Initialize the accounts array with test data
 	factory.accounts = [
-		{ name: 'A', balance: 2500, APR: 10, payment: 200 },
-		{ name: 'B', balance: 2000, APR: 16, payment: 250 },
-		{ name: 'C', balance: 3000, APR: 12, payment: 150 },
-		{ name: 'D', balance: 1000, APR: 8, payment: 75 },
-		{ name: 'E', balance: 5000, APR: 4, payment: 300 }
+		{ name: 'Credit Card #1', balance: 2500, APR: 10, payment: 200 },
+		{ name: 'Credit Card #2', balance: 4500, APR: 6.5, payment: 250 },
+		{ name: 'Credit Card #3', balance: 10000, APR: 6.5, payment: 250 },
+		{ name: 'Car', balance: 13000, APR: 2.9, payment: 150 },
+		{ name: 'Student Loan', balance: 5000, APR: 7.5, payment: 300 }
 	];
 
 	/**
@@ -251,7 +251,7 @@ var navController = function( $scope, $location ) {
 angular.module( 'debt-calculator' )
 	.controller( 'NavController', navController );
 var reportController = function( $scope, ReportFactory ) {
-
+	$scope.activeTab = 1;
 	/**
      * @ngdoc property
      * @name reportData
@@ -382,9 +382,11 @@ var reportFactory = function( AccountFactory, $filter ){
      */
 
     factory.reportTypes = [
-		{ name: "Highest APR First", sortAlgorithm: 'APR', reverse: true },
-		{ name: "Lowest Balance First", sortAlgorithm: 'balance', reverse: false },
-		{ name: "Weighted Algorithm", sortAlgorithm: 'APR', reverse: true }
+		{ name: "Highest APR First", reverse: true, sortAlgorithm: 'APR' },
+		{ name: "Lowest Balance First", reverse: false, sortAlgorithm: 'balance' },
+		{ name: "Weighted Algorithm", reverse: true, sortAlgorithm: function( account ) {
+			return account.payment / account.balance;
+		}}
 	];
 
 	/**
@@ -440,7 +442,9 @@ var reportFactory = function( AccountFactory, $filter ){
      */
 	
 	factory.runReport = function( reportType, extrapayment ) {
-		var accounts 	 	= $filter( 'orderBy' )( AccountFactory.accounts, reportType.sortAlgorithm );
+		var accounts 	 	= $filter( 'orderBy' )( angular.copy( AccountFactory.accounts ), reportType.sortAlgorithm, reportType.reverse );
+
+		console.log( accounts );
 		var totalBalance 	= factory.calculateTotalBalance( accounts );
 		
 		factory.reportData 	= { accounts: [], months : [], interestPaid : 0 };
