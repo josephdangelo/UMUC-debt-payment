@@ -33,7 +33,7 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      // Move all the .html files from /src to /dist
+      // Move all the non .js files from /src to /dist
       build: {
         src: ['!**/*.js','**/*'],
         dest: 'dist/',
