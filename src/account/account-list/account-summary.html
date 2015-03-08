@@ -6,30 +6,37 @@
 		<div class="row">
 			<div class="col-xs-6">
 				<strong># of Accounts</strong>
+				<i class="glyphicon glyphicon-info-sign" data-delay="100" data-title="The number of accounts you have entered into the system so far" bs-tooltip></i>
 			</div>
 			<div class="col-xs-6">
 				{{ accounts.length }}
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-6">
-				<strong>Blended APR</strong>
-			</div>
-			<div class="col-xs-6">
-				{{ blendedAPR / totalBalance | number:2}}%
-			</div>
-		</div>
+		
 		<div class="row">
 			<div class="col-xs-6">
 				<strong>Total Balance</strong>
+				<i class="glyphicon glyphicon-info-sign" data-delay="100" data-title="The sum of all current balances for the accounts you have entered" bs-tooltip></i>
 			</div>
 			<div class="col-xs-6">
 				{{ totalBalance | currency }}
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-xs-6">
+				<strong>Blended APR</strong>
+				<i class="glyphicon glyphicon-info-sign" data-delay="100" data-title="The sum of ( APR * balance ) for each account, divided by the total balance of all accounts " bs-tooltip></i>
+			</div>
+			<div class="col-xs-6">
+				{{ blendedAPR / totalBalance | number:2}}%
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-xs-6">
 				<strong>Total Monthly Payment</strong>
+				<i class="glyphicon glyphicon-info-sign" data-delay="100" data-title="The sum of the minimum monthly payment for all accounts you have entered" bs-tooltip></i>
 			</div>
 			<div class="col-xs-6">
 				{{ totalMonthly | currency }}

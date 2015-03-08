@@ -232,10 +232,10 @@ var navController = function( $scope, $location ) {
      * Contains all the navigation elements that will be rendered in the application header
      */
 	$scope.navItems = [
-		{ label: 'Accounts', location: '#/accounts'},
-		{ label: 'Reports', location: '#/reports'},
-		{ label: 'How to Use', location: '#/howtouse'},
-		{ label: 'About', location: '#/about'}
+		{ label: 'Accounts',	location: '#/accounts',	 icon: "glyphicon-usd"},
+		{ label: 'Reports',		location: '#/reports',	 icon: "glyphicon-stats"},
+		{ label: 'How to Use',	location: '#/howtouse',	 icon: "glyphicon-question-sign"},
+		{ label: 'About',		location: '#/about',	 icon: "glyphicon-info-sign"}
 	];
 
 	/* 
@@ -250,7 +250,7 @@ var navController = function( $scope, $location ) {
 
 angular.module( 'debt-calculator' )
 	.controller( 'NavController', navController );
-var reportController = function( $scope, ReportFactory ) {
+var reportController = function( $scope, $location, $anchorScroll, $timeout, ReportFactory ) {
 	$scope.activeTab = 1;
 	/**
      * @ngdoc property
@@ -295,7 +295,7 @@ var reportController = function( $scope, ReportFactory ) {
      * The currently selected report type in the user interface; defaults to the first report type
      */
 	$scope.selectedReportType 	= ReportFactory.reportTypes[ 0 ];
-	
+
 	/**
      * @ngdoc method
      * @name runReport
@@ -322,7 +322,7 @@ var reportController = function( $scope, ReportFactory ) {
         });
 
 		// Initialize the Highchart graph
-		$('#container').highcharts({
+		$('#report-container').highcharts({
 	        title: {
 	            text: 'Projected Balances',
 	            x: -20 //center

@@ -5,7 +5,7 @@
  * Front-end controller for the reports page in the system
  */
 
-var reportController = function( $scope, ReportFactory ) {
+var reportController = function( $scope, $location, $anchorScroll, $timeout, ReportFactory ) {
 	$scope.activeTab = 1;
 	/**
      * @ngdoc property
@@ -50,7 +50,7 @@ var reportController = function( $scope, ReportFactory ) {
      * The currently selected report type in the user interface; defaults to the first report type
      */
 	$scope.selectedReportType 	= ReportFactory.reportTypes[ 0 ];
-	
+
 	/**
      * @ngdoc method
      * @name runReport
@@ -77,7 +77,7 @@ var reportController = function( $scope, ReportFactory ) {
         });
 
 		// Initialize the Highchart graph
-		$('#container').highcharts({
+		$('#report-container').highcharts({
 	        title: {
 	            text: 'Projected Balances',
 	            x: -20 //center

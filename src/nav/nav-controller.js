@@ -41,10 +41,10 @@ var navController = function( $scope, $location ) {
      * Contains all the navigation elements that will be rendered in the application header
      */
 	$scope.navItems = [
-		{ label: 'Accounts', location: '#/accounts'},
-		{ label: 'Reports', location: '#/reports'},
-		{ label: 'How to Use', location: '#/howtouse'},
-		{ label: 'About', location: '#/about'}
+		{ label: 'Accounts',	location: '#/accounts',	 icon: "glyphicon-usd"},
+		{ label: 'Reports',		location: '#/reports',	 icon: "glyphicon-stats"},
+		{ label: 'How to Use',	location: '#/howtouse',	 icon: "glyphicon-question-sign"},
+		{ label: 'About',		location: '#/about',	 icon: "glyphicon-info-sign"}
 	];
 
 	/* 
